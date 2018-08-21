@@ -1,1 +1,1 @@
-# Battleships
+# Battleships Coding Conventions accepted by all
