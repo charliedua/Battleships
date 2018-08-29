@@ -1,4 +1,4 @@
-﻿namespace MyGame {
+namespace MyGame {
      // '' <summary>
      // '' The SeaGrid is the grid upon which the ships are deployed.
      // '' </summary>
@@ -217,3 +217,4 @@ public class SeaGrid : ISeaGrid
 
     }
 }
+
