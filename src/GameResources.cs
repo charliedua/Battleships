@@ -68,10 +68,10 @@ namespace MyGame
         }
 
         /// <summary>
-        ///      Gets a Font Loaded in the Resources
-        ///      </summary>
-        ///      <param name="font">Name of Font</param>
-        ///      <returns>The Font Loaded with this Name</returns>
+        /// Gets a Font Loaded in the Resources
+        /// </summary>
+        /// <param name="font">Name of Font</param>
+        /// <returns>The Font Loaded with this Name</returns>
 
         public static Font GameFont(string font)
         {
@@ -79,10 +79,10 @@ namespace MyGame
         }
 
         /// <summary>
-        ///      Gets an Image loaded in the Resources
-        ///      </summary>
-        ///      <param name="image">Name of image</param>
-        ///      <returns>The image loaded with this name</returns>
+        /// Gets an Image loaded in the Resources
+        /// </summary>
+        /// <param name="image">Name of image</param>
+        /// <returns>The image loaded with this name</returns>
 
         public static Bitmap GameImage(string image)
         {
@@ -90,10 +90,10 @@ namespace MyGame
         }
 
         /// <summary>
-        ///      Gets an sound loaded in the Resources
-        ///      </summary>
-        ///      <param name="sound">Name of sound</param>
-        ///      <returns>The sound with this name</returns>
+        /// Gets an sound loaded in the Resources
+        /// </summary>
+        /// <param name="sound">Name of sound</param>
+        /// <returns>The sound with this name</returns>
 
         public static SoundEffect GameSound(string sound)
         {
@@ -101,10 +101,10 @@ namespace MyGame
         }
 
         /// <summary>
-        ///      Gets the music loaded in the Resources
-        ///      </summary>
-        ///      <param name="music">Name of music</param>
-        ///      <returns>The music with this name</returns>
+        /// Gets the music loaded in the Resources
+        /// </summary>
+        /// <param name="music">Name of music</param>
+        /// <returns>The music with this name</returns>
 
         public static Music GameMusic(string music)
         {
@@ -124,9 +124,9 @@ namespace MyGame
         private static SoundEffect _StartSound;
 
         /// <summary>
-        ///      The Resources Class stores all of the Games Media Resources, such as Images, Fonts
-        ///      Sounds, Music.
-        ///      </summary>
+        /// The Resources Class stores all of the Games Media Resources, such as Images, Fonts
+        /// Sounds, Music.
+        /// </summary>
 
         public static void LoadResources()
         {
@@ -220,7 +220,8 @@ namespace MyGame
             toDraw.Width = TW;
             toDraw.Height = TH;
             SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
-            // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
+            // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont,
+            // FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();
             SwinGame.ProcessEvents();
