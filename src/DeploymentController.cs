@@ -12,48 +12,49 @@ using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using SwinGameSDK;
 
-namespace MyGame { 
+namespace MyGame
+{
     /// <summary>
 
-    /// ''' The DeploymentController controls the players actions
+    ///  The DeploymentController controls the players actions
 
-    /// ''' during the deployment phase.
+    ///  during the deployment phase.
 
-    /// ''' </summary>
-    static class DeploymentController
+    ///  </summary>
+    internal static class DeploymentController
     {
-        private const static int SHIPS_TOP = 98;
-        private const static int SHIPS_LEFT = 20;
-        private const static int SHIPS_HEIGHT = 90;
-        private const static int SHIPS_WIDTH = 300;
+        private const private static int SHIPS_TOP = 98;
+        private const private static int SHIPS_LEFT = 20;
+        private const private static int SHIPS_HEIGHT = 90;
+        private const private static int SHIPS_WIDTH = 300;
 
-        private const static int TOP_BUTTONS_TOP = 72;
-        private const static int TOP_BUTTONS_HEIGHT = 46;
+        private const private static int TOP_BUTTONS_TOP = 72;
+        private const private static int TOP_BUTTONS_HEIGHT = 46;
 
-        private const static int PLAY_BUTTON_LEFT = 693;
-        private const static int PLAY_BUTTON_WIDTH = 80;
+        private const private static int PLAY_BUTTON_LEFT = 693;
+        private const private static int PLAY_BUTTON_WIDTH = 80;
 
-        private const static int UP_DOWN_BUTTON_LEFT = 410;
-        private const static int LEFT_RIGHT_BUTTON_LEFT = 350;
+        private const private static int UP_DOWN_BUTTON_LEFT = 410;
+        private const private static int LEFT_RIGHT_BUTTON_LEFT = 350;
 
-        private const static int RANDOM_BUTTON_LEFT = 547;
-        private const static int RANDOM_BUTTON_WIDTH = 51;
+        private const private static int RANDOM_BUTTON_LEFT = 547;
+        private const private static int RANDOM_BUTTON_WIDTH = 51;
 
-        private const static int DIR_BUTTONS_WIDTH = 47;
+        private const private static int DIR_BUTTONS_WIDTH = 47;
 
-        private const static int TEXT_OFFSET = 5;
+        private const private static int TEXT_OFFSET = 5;
 
         private static Direction _currentDirection = Direction.UpDown;
         private static ShipName _selectedShip = ShipName.Tug;
 
         /// <summary>
-        ///     ''' Handles user input for the Deployment phase of the game.
-        ///     ''' </summary>
-        ///     ''' <remarks>
-        ///     ''' Involves selecting the ships, deloying ships, changing the direction
-        ///     ''' of the ships to add, randomising deployment, end then ending
-        ///     ''' deployment
-        ///     ''' </remarks>
+        ///      Handles user input for the Deployment phase of the game.
+        ///      </summary>
+        ///      <remarks>
+        ///      Involves selecting the ships, deloying ships, changing the direction
+        ///      of the ships to add, randomising deployment, end then ending
+        ///      deployment
+        ///      </remarks>
         public static void HandleDeploymentInput()
         {
             if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
@@ -88,13 +89,13 @@ namespace MyGame {
         }
 
         /// <summary>
-        ///     ''' The user has clicked somewhere on the screen, check if its is a deployment and deploy
-        ///     ''' the current ship if that is the case.
-        ///     ''' </summary>
-        ///     ''' <remarks>
-        ///     ''' If the click is in the grid it deploys to the selected location
-        ///     ''' with the indicated direction
-        ///     ''' </remarks>
+        ///      The user has clicked somewhere on the screen, check if its is a deployment and deploy
+        ///      the current ship if that is the case.
+        ///      </summary>
+        ///      <remarks>
+        ///      If the click is in the grid it deploys to the selected location
+        ///      with the indicated direction
+        ///      </remarks>
         private static void DoDeployClick()
         {
             Point2D mouse;
@@ -125,9 +126,9 @@ namespace MyGame {
         }
 
         /// <summary>
-        ///     ''' Draws the deployment screen showing the field and the ships
-        ///     ''' that the player can deploy.
-        ///     ''' </summary>
+        ///      Draws the deployment screen showing the field and the ships
+        ///      that the player can deploy.
+        ///      </summary>
         public static void DrawDeployment()
         {
             DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
@@ -159,9 +160,9 @@ namespace MyGame {
         }
 
         /// <summary>
-        ///     ''' Gets the ship that the mouse is currently over in the selection panel.
-        ///     ''' </summary>
-        ///     ''' <returns>The ship selected or none</returns>
+        ///      Gets the ship that the mouse is currently over in the selection panel.
+        ///      </summary>
+        ///      <returns>The ship selected or none</returns>
         private static ShipName GetShipMouseIsOver()
         {
             foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
