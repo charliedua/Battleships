@@ -67,7 +67,7 @@ namespace MyGame
             }
         }
 
-        public static GameController()
+        static GameController()
         {
             // bottom state will be quitting. If player exits main menu then the game is over
             _state.Push(GameState.Quitting);
@@ -113,7 +113,7 @@ namespace MyGame
             _human = new Player(_theGame);
 
             // AddHandler _human.PlayerGrid.Changed, AddressOf GridChanged
-            _ai.PlayerGrid.Changed += GridChanged;
+            _ai.PlayerGrid.Changed += GameController.GridChanged;
             _theGame.AttackCompleted += AttackCompleted;
 
             AddNewState(GameState.Deploying);
@@ -126,7 +126,7 @@ namespace MyGame
         private static void EndGame()
         {
             // RemoveHandler _human.PlayerGrid.Changed, AddressOf GridChanged
-            _ai.PlayerGrid.Changed -= GridChanged;
+            _ai.PlayerGrid.Changed -= GameController.GridChanged;
             _theGame.AttackCompleted -= AttackCompleted;
         }
 
@@ -137,28 +137,28 @@ namespace MyGame
         /// <param name="args">not used</param>
         private static void GridChanged(object sender, EventArgs args)
         {
-            DrawScreen();
+            GameController.DrawScreen();
             SwinGame.RefreshScreen();
         }
 
         private static void PlayHitSequence(int row, int column, bool showAnimation)
         {
             if (showAnimation)
-                AddExplosion(row, column);
+                UtilityFunctions.AddExplosion(row, column);
 
-            Audio.PlaySoundEffect(GameSound("Hit"));
+            Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
 
-            DrawAnimationSequence();
+            UtilityFunctions.DrawAnimationSequence();
         }
 
         private static void PlayMissSequence(int row, int column, bool showAnimation)
         {
             if (showAnimation)
-                AddSplash(row, column);
+                UtilityFunctions.AddSplash(row, column);
 
-            Audio.PlaySoundEffect(GameSound("Miss"));
+            Audio.PlaySoundEffect(GameResources.GameSound("Miss"));
 
-            DrawAnimationSequence();
+            UtilityFunctions.DrawAnimationSequence();
         }
 
         /// <summary>
@@ -181,32 +181,32 @@ namespace MyGame
             {
                 case ResultOfAttack.Destroyed:
                     {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
-                        Audio.PlaySoundEffect(GameSound("Sink"));
+                        GameController.PlayHitSequence(result.Row, result.Column, isHuman);
+                        Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
                         break;
                     }
 
                 case ResultOfAttack.GameOver:
                     {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
-                        Audio.PlaySoundEffect(GameSound("Sink"));
+                        GameController.PlayHitSequence(result.Row, result.Column, isHuman);
+                        Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
 
-                        while (Audio.SoundEffectPlaying(GameSound("Sink")))
+                        while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink")))
                         {
                             SwinGame.Delay(10);
                             SwinGame.RefreshScreen();
                         }
 
                         if (HumanPlayer.IsDestroyed)
-                            Audio.PlaySoundEffect(GameSound("Lose"));
+                            Audio.PlaySoundEffect(GameResources.GameSound("Lose"));
                         else
-                            Audio.PlaySoundEffect(GameSound("Winner"));
+                            Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
                         break;
                     }
 
                 case ResultOfAttack.Hit:
                     {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
+                        GameController.PlayHitSequence(result.Row, result.Column, isHuman);
                         break;
                     }
 
@@ -218,7 +218,7 @@ namespace MyGame
 
                 case ResultOfAttack.ShotAlready:
                     {
-                        Audio.PlaySoundEffect(GameSound("Error"));
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         break;
                     }
             }
@@ -273,7 +273,7 @@ namespace MyGame
                 case ResultOfAttack.Miss:
                     {
                         if (_theGame.Player == ComputerPlayer)
-                            AIAttack();
+                            GameController.AIAttack();
                         break;
                     }
 
@@ -342,7 +342,7 @@ namespace MyGame
                     }
             }
 
-            UpdateAnimations();
+            UtilityFunctions.UpdateAnimations();
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace MyGame
         /// <remarks>What is drawn depends upon the state of the game.</remarks>
         public static void DrawScreen()
         {
-            DrawBackground();
+            UtilityFunctions.DrawBackground();
 
             switch (CurrentState)
             {
@@ -398,7 +398,7 @@ namespace MyGame
                     }
             }
 
-            DrawAnimations();
+            UtilityFunctions.DrawAnimations();
 
             SwinGame.RefreshScreen();
         }

@@ -1,6 +1,8 @@
+using SwinGameSDK;
+
 namespace MyGame
 {
-    static class GameMain
+    internal static class GameMain
     {
         public static void Main()
         {
@@ -8,14 +10,14 @@ namespace MyGame
             SwinGame.OpenGraphicsWindow("Battle Ships", 800, 600);
 
             // Load Resources
-            LoadResources();
+            GameResources.LoadResources();
 
-            SwinGame.PlayMusic(GameMusic("Background"));
+            SwinGame.PlayMusic(GameResources.GameMusic("Background"));
 
             // Game Loop
             do
             {
-                HandleUserInput();
+                GameController.HandleUserInput();
                 DrawScreen();
             }
             while (!SwinGame.WindowCloseRequested() == true | CurrentState == GameState.Quitting);
@@ -27,4 +29,3 @@ namespace MyGame
         }
     }
 }
-

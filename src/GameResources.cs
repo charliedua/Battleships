@@ -148,11 +148,11 @@ namespace MyGame
             SwinGame.Delay(100);
 
             ShowMessage("Loading sounds...", 2);
-            LoadSounds();
+            GameResources.LoadSounds();
             SwinGame.Delay(100);
 
             ShowMessage("Loading music...", 3);
-            LoadMusic();
+            GameResources.LoadMusic();
             SwinGame.Delay(100);
 
             SwinGame.Delay(100);
@@ -269,7 +269,7 @@ namespace MyGame
 
         private static void NewMusic(string musicName, string filename)
         {
-            _Music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
+            _Music.Add(musicName, Audio.GameResources.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
         private static void FreeFonts()

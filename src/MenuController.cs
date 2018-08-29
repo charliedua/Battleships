@@ -96,7 +96,7 @@ namespace MyGame
         {
             if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
             {
-                EndCurrentState();
+                GameController.EndCurrentState();
                 return true;
             }
 
@@ -115,7 +115,7 @@ namespace MyGame
 
                 if (level > 0)
                     // none clicked - so end this sub menu
-                    EndCurrentState();
+                    GameController.EndCurrentState();
             }
 
             return false;
@@ -127,7 +127,7 @@ namespace MyGame
         public static void DrawMainMenu()
         {
             // Clears the Screen to Black SwinGame.DrawText("Main Menu", Color.White,
-            // GameFont("ArialLarge"), 50, 50)
+            // GameResources.GameFont("ArialLarge"), 50, 50)
 
             DrawButtons(MAIN_MENU);
         }
@@ -138,7 +138,7 @@ namespace MyGame
         public static void DrawGameMenu()
         {
             // Clears the Screen to Black SwinGame.DrawText("Paused", Color.White,
-            // GameFont("ArialLarge"), 50, 50)
+            // GameResources.GameFont("ArialLarge"), 50, 50)
 
             DrawButtons(GAME_MENU);
         }
@@ -150,7 +150,7 @@ namespace MyGame
         public static void DrawSettings()
         {
             // Clears the Screen to Black SwinGame.DrawText("Settings", Color.White,
-            // GameFont("ArialLarge"), 50, 50)
+            // GameResources.GameFont("ArialLarge"), 50, 50)
 
             DrawButtons(MAIN_MENU);
             DrawButtons(SETUP_MENU, 1, 1);
@@ -193,7 +193,7 @@ namespace MyGame
                 toDraw.Y = btnTop + TEXT_OFFSET;
                 toDraw.Width = BUTTON_WIDTH;
                 toDraw.Height = BUTTON_HEIGHT;
-                SwinGame.DrawTextLines(_menuStructure[menu](i), MENU_COLOR, Color.Black, GameFont("Menu"), FontAlignment.AlignCenter, toDraw);
+                SwinGame.DrawTextLines(_menuStructure[menu](i), MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, toDraw);
 
                 if (SwinGame.MouseDown(MouseButton.LeftButton) & IsMouseOverMenu(i, level, xOffset))
                     SwinGame.DrawRectangle(HIGHLIGHT_COLOR, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -222,7 +222,7 @@ namespace MyGame
             int btnTop = MENU_TOP - (MENU_GAP + BUTTON_HEIGHT) * level;
             int btnLeft = MENU_LEFT + BUTTON_SEP * (button + xOffset);
 
-            return IsMouseInRectangle(btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+            return UtilityFunctions.IsMouseInRectangle(btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace MyGame
             {
                 case MAIN_MENU_PLAY_BUTTON:
                     {
-                        StartGame();
+                        GameController.StartGame();
                         break;
                     }
 
@@ -282,7 +282,7 @@ namespace MyGame
 
                 case MAIN_MENU_QUIT_BUTTON:
                     {
-                        EndCurrentState();
+                        GameController.EndCurrentState();
                         break;
                     }
             }
@@ -298,24 +298,24 @@ namespace MyGame
             {
                 case SETUP_MENU_EASY_BUTTON:
                     {
-                        SetDifficulty(AIOption.Hard);
+                        GameController.SetDifficulty(AIOption.Hard);
                         break;
                     }
 
                 case SETUP_MENU_MEDIUM_BUTTON:
                     {
-                        SetDifficulty(AIOption.Hard);
+                        GameController.SetDifficulty(AIOption.Hard);
                         break;
                     }
 
                 case SETUP_MENU_HARD_BUTTON:
                     {
-                        SetDifficulty(AIOption.Hard);
+                        GameController.SetDifficulty(AIOption.Hard);
                         break;
                     }
             }
             // Always end state - handles exit button as well
-            EndCurrentState();
+            GameController.EndCurrentState();
         }
 
         /// <summary>
@@ -328,14 +328,14 @@ namespace MyGame
             {
                 case GAME_MENU_RETURN_BUTTON:
                     {
-                        EndCurrentState();
+                        GameController.EndCurrentState();
                         break;
                     }
 
                 case GAME_MENU_SURRENDER_BUTTON:
                     {
-                        EndCurrentState(); // end game menu
-                        EndCurrentState(); // end game
+                        GameController.EndCurrentState(); // end game menu
+                        GameController.EndCurrentState(); // end game
                         break;
                     }
 

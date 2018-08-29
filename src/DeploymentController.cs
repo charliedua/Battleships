@@ -19,29 +19,29 @@ namespace MyGame
     /// </summary>
     internal static class DeploymentController
     {
-        private const private static int SHIPS_TOP = 98;
-        private const private static int SHIPS_LEFT = 20;
-        private const private static int SHIPS_HEIGHT = 90;
-        private const private static int SHIPS_WIDTH = 300;
+        private const int SHIPS_TOP = 98;
+        private const int SHIPS_LEFT = 20;
+        private const int SHIPS_HEIGHT = 90;
+        private const int SHIPS_WIDTH = 300;
 
-        private const private static int TOP_BUTTONS_TOP = 72;
-        private const private static int TOP_BUTTONS_HEIGHT = 46;
+        private const int TOP_BUTTONS_TOP = 72;
+        private const int TOP_BUTTONS_HEIGHT = 46;
 
-        private const private static int PLAY_BUTTON_LEFT = 693;
-        private const private static int PLAY_BUTTON_WIDTH = 80;
+        private const int PLAY_BUTTON_LEFT = 693;
+        private const int PLAY_BUTTON_WIDTH = 80;
 
-        private const private static int UP_DOWN_BUTTON_LEFT = 410;
-        private const private static int LEFT_RIGHT_BUTTON_LEFT = 350;
+        private const int UP_DOWN_BUTTON_LEFT = 410;
+        private const int LEFT_RIGHT_BUTTON_LEFT = 350;
 
-        private const private static int RANDOM_BUTTON_LEFT = 547;
-        private const private static int RANDOM_BUTTON_WIDTH = 51;
+        private const int RANDOM_BUTTON_LEFT = 547;
+        private const int RANDOM_BUTTON_WIDTH = 51;
 
-        private const private static int DIR_BUTTONS_WIDTH = 47;
+        private const int DIR_BUTTONS_WIDTH = 47;
 
-        private const private static int TEXT_OFFSET = 5;
+        private const int TEXT_OFFSET = 5;
 
-        private static Direction _currentDirection = Direction.UpDown;
-        private static ShipName _selectedShip = ShipName.Tug;
+        private Direction _currentDirection = Direction.UpDown;
+        private ShipName _selectedShip = ShipName.Tug;
 
         /// <summary>
         /// Handles user input for the Deployment phase of the game.
@@ -53,7 +53,7 @@ namespace MyGame
         public static void HandleDeploymentInput()
         {
             if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
-                AddNewState(GameState.ViewingGameMenu);
+                GameController.AddNewState(GameState.ViewingGameMenu);
 
             if (SwinGame.KeyTyped(KeyCode.VK_UP) | SwinGame.KeyTyped(KeyCode.VK_DOWN))
                 _currentDirection = Direction.UpDown;
@@ -72,13 +72,13 @@ namespace MyGame
                 else
                     DoDeployClick();
 
-                if (HumanPlayer.ReadyToDeploy & IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
-                    EndDeployment();
-                else if (IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                if (HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+                    GameController.EndDeployment();
+                else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                     _currentDirection = Direction.LeftRight;
-                else if (IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                     _currentDirection = Direction.LeftRight;
-                else if (IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
                     HumanPlayer.RandomizeDeployment();
             }
         }
@@ -112,7 +112,7 @@ namespace MyGame
                     }
                     catch (Exception ex)
                     {
-                        Audio.PlaySoundEffect(GameSound("Error"));
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         Message = ex.Message;
                     }
                 }
@@ -124,13 +124,13 @@ namespace MyGame
         /// </summary>
         public static void DrawDeployment()
         {
-            DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
+            UtilityFunctions.DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
 
             // Draw the Left/Right and Up/Down buttons
             if (_currentDirection == Direction.LeftRight)
-                SwinGame.DrawBitmap(GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+                SwinGame.DrawBitmap(GameResources.GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
             else
-                SwinGame.DrawBitmap(GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+                SwinGame.DrawBitmap(GameResources.GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
             // DrawShips
             foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
@@ -140,16 +140,16 @@ namespace MyGame
                 if (i >= 0)
                 {
                     if (sn == _selectedShip)
-                        SwinGame.DrawBitmap(GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
+                        SwinGame.DrawBitmap(GameResources.GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
                 }
             }
 
             if (HumanPlayer.ReadyToDeploy)
-                SwinGame.DrawBitmap(GameImage("PlayButton"), PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP);
+                SwinGame.DrawBitmap(GameResources.GameImage("PlayButton"), PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
-            SwinGame.DrawBitmap(GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
+            SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
-            DrawMessage();
+            UtilityFunctions.DrawMessage();
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace MyGame
                 int i;
                 i = Int(sn) - 1;
 
-                if (IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
+                if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
                     return sn;
             }
 

@@ -27,8 +27,8 @@ namespace MyGame
             Rectangle toDraw;
             string whatShouldIPrint;
 
-            DrawField(ComputerPlayer.PlayerGrid, ComputerPlayer, true);
-            DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawField(ComputerPlayer.PlayerGrid, ComputerPlayer, true);
+            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
 
             toDraw.X = 0;
             toDraw.Y = 250;
@@ -40,7 +40,7 @@ namespace MyGame
             else
                 whatShouldIPrint = "-- WINNER --";
 
-            SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
         }
 
         /// <summary>

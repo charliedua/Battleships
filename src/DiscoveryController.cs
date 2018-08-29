@@ -25,8 +25,8 @@ namespace MyGame
         /// <remarks>Escape opens the game menu. Clicking the mouse will attack a location.</remarks>
         public static void HandleDiscoveryInput()
         {
-            if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
-                AddNewState(GameState.ViewingGameMenu);
+            if (SwinGame.KeyTyped(KeyCode.EscapeKey))
+                GameController.AddNewState(GameState.ViewingGameMenu);
 
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
                 DoAttack();
@@ -49,7 +49,7 @@ namespace MyGame
             if (row >= 0 & row < HumanPlayer.EnemyGrid.Height)
             {
                 if (col >= 0 & col < HumanPlayer.EnemyGrid.Width)
-                    Attack(row, col);
+                    GameController.Attack(row, col);
             }
         }
 
@@ -64,16 +64,16 @@ namespace MyGame
             const int SPLASH_TOP = 256;
 
             if ((SwinGame.KeyDown(KeyCode.VK_LSHIFT) | SwinGame.KeyDown(KeyCode.VK_RSHIFT)) & SwinGame.KeyDown(KeyCode.VK_C))
-                DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, true);
+                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, true);
             else
-                DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, false);
+                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, false);
 
-            DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
-            DrawMessage();
+            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawMessage();
 
-            SwinGame.DrawText(HumanPlayer.Shots.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
-            SwinGame.DrawText(HumanPlayer.Hits.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, HITS_TOP);
-            SwinGame.DrawText(HumanPlayer.Missed.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
+            SwinGame.DrawText(HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
+            SwinGame.DrawText(HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
+            SwinGame.DrawText(HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
         }
     }
 }
