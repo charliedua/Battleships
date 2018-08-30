@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using SwinGameSDK;
+
 namespace MyGame
 {
     /// <summary>
@@ -9,10 +13,8 @@ namespace MyGame
     /// </remarks>
     public class SeaGrid : ISeaGrid
     {
-        private const int _WIDTH = 10;
-
         private const int _HEIGHT = 10;
-
+        private const int _WIDTH = 10;
         private Dictionary<ShipName, Ship> _Ships;
 
         private int _ShipsKilled = 0;
@@ -21,19 +23,6 @@ namespace MyGame
         /// The sea grid has changed and should be redrawn.
         /// </summary>
         public event EventHandler Changed;
-
-        /// <summary>
-        /// The width of the sea grid.
-        /// </summary>
-        /// <value>The width of the sea grid.</value>
-        /// <returns>The width of the sea grid.</returns>
-        public int Width
-        {
-            get
-            {
-                return _WIDTH;
-            }
-        }
 
         public int Height
         {
@@ -51,13 +40,22 @@ namespace MyGame
             }
         }
 
+        /// <summary>
+        /// The width of the sea grid.
+        /// </summary>
+        /// <value>The width of the sea grid.</value>
+        /// <returns>The width of the sea grid.</returns>
+        public int Width
+        {
+            get
+            {
+                return _WIDTH;
+            }
+        }
+
         public TileView this[int x, int y]
         {
         }
-    }
-
-    Endclass Unknown
-    {
     }
 
     /// <summary>

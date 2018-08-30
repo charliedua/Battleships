@@ -16,10 +16,10 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using SwinGameSDK;
 
 public class BattleShipsGame
 {
-
     /// <summary>
     /// The attack delegate type is used to send notifications of the end of an
     /// attack by a player or the AI.
@@ -108,4 +108,3 @@ public class BattleShipsGame
         return newAttack;
     }
 }
-

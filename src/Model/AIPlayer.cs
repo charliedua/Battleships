@@ -14,10 +14,10 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using SwinGameSDK;
 
 public abstract class AIPlayer : Player
 {
-
     /// <summary>
     /// Location can store the location of the last hit made by an
     /// AI Player. The use of which determines the difficulty.
@@ -95,7 +95,6 @@ public abstract class AIPlayer : Player
         }
     }
 
-
     public AIPlayer(BattleShipsGame game) : base(game)
     {
     }
@@ -157,4 +156,3 @@ public abstract class AIPlayer : Player
         }
     }
 }
-

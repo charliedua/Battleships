@@ -20,7 +20,6 @@ using Microsoft.VisualBasic;
 
 public class AIHardPlayer : AIPlayer
 {
-
     /// <summary>
     /// Target allows the AI to know more things, for example the source of a
     /// shot target
@@ -197,25 +196,25 @@ public class AIHardPlayer : AIPlayer
     {
         switch (result.Value)
         {
-            case object _ when ResultOfAttack.Miss:
+            case ResultOfAttack.Miss:
                 {
                     _CurrentTarget = null;
                     break;
                 }
 
-            case object _ when ResultOfAttack.Hit:
+            case ResultOfAttack.Hit:
                 {
                     ProcessHit(row, col);
                     break;
                 }
 
-            case object _ when ResultOfAttack.Destroyed:
+            case ResultOfAttack.Destroyed:
                 {
                     ProcessDestroy(row, col, result.Ship);
                     break;
                 }
 
-            case object _ when ResultOfAttack.ShotAlready:
+            case ResultOfAttack.ShotAlready:
                 {
                     throw new ApplicationException("Error in AI");
                     break;
@@ -290,7 +289,6 @@ public class AIHardPlayer : AIPlayer
         // check all targets in the _Targets stack
         foreach (Target t in _Targets)
         {
-
             // if the source of the target does not belong to the destroyed ship put them on the newStack
             if (t.Source != toRemove)
                 newStack.Push(t);
@@ -343,7 +341,6 @@ public class AIHardPlayer : AIPlayer
     /// </summary>
     private void ReOrderTargets()
     {
-
         // if the ship is lying on the same row, call MoveToTopOfStack to optimise on the row
         if (_CurrentTarget.SameRow)
             MoveToTopOfStack(_CurrentTarget.ShotAt.Row, -1);
@@ -396,4 +393,3 @@ public class AIHardPlayer : AIPlayer
             _Targets.Push(new Target(new Location(row, column), _CurrentTarget.ShotAt));
     }
 }
-

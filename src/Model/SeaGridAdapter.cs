@@ -14,6 +14,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using SwinGameSDK;
 
 public class SeaGridAdapter : ISeaGrid
 {
@@ -38,7 +39,6 @@ public class SeaGridAdapter : ISeaGrid
     {
         Changed?.Invoke(this, e);
     }
-
 
     /// <summary>
     /// Changes the discovery grid. Where there is a ship we will sea water
@@ -97,4 +97,3 @@ public class SeaGridAdapter : ISeaGrid
         return _MyGrid.HitTile(row, col);
     }
 }
-

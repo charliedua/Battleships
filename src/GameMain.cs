@@ -1,4 +1,6 @@
-static class GameMain
+using SwinGameSDK;
+
+internal static class GameMain
 {
     public static void Main()
     {
@@ -24,4 +26,3 @@ static class GameMain
         FreeResources();
     }
 }
-

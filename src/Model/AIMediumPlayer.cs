@@ -1,5 +1,4 @@
-﻿
-/// <summary>
+﻿/// <summary>
 
 /// The AIMediumPlayer is a type of AIPlayer where it will try and destroy a ship
 
@@ -18,6 +17,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using SwinGameSDK;
 
 public class AIMediumPlayer : AIPlayer
 {
@@ -137,4 +137,3 @@ public class AIMediumPlayer : AIPlayer
             _Targets.Push(new Location(row, column));
     }
 }
-
