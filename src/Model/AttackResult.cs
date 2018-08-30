@@ -15,108 +15,111 @@ using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using SwinGameSDK;
 
-public class AttackResult
+namespace MyGame
 {
-    private ResultOfAttack _Value;
-    private Ship _Ship;
-    private string _Text;
-    private int _Row;
-    private int _Column;
-
-    /// <summary>
-    /// The result of the attack
-    /// </summary>
-    /// <value>The result of the attack</value>
-    /// <returns>The result of the attack</returns>
-    public ResultOfAttack Value
+    public class AttackResult
     {
-        get
+        private int _Column;
+        private int _Row;
+        private Ship _Ship;
+        private string _Text;
+        private ResultOfAttack _Value;
+
+        /// <summary>
+        /// Set the _Value to the PossibleAttack value
+        /// </summary>
+        /// <param name="value">either hit, miss, destroyed, shotalready</param>
+        public AttackResult(ResultOfAttack value, string text, int row, int column)
         {
-            return _Value;
+            _Value = value;
+            _Text = text;
+            _Ship = null;
+            _Row = row;
+            _Column = column;
         }
-    }
 
-    /// <summary>
-    /// The ship, if any, involved in this result
-    /// </summary>
-    /// <value>The ship, if any, involved in this result</value>
-    /// <returns>The ship, if any, involved in this result</returns>
-    public Ship Ship
-    {
-        get
+        /// <summary>
+        /// Set the _Value to the PossibleAttack value, and the _Ship to the ship
+        /// </summary>
+        /// <param name="value">either hit, miss, destroyed, shotalready</param>
+        /// <param name="ship">the ship information</param>
+        public AttackResult(ResultOfAttack value, Ship ship, string text, int row, int column) : this(value, text, row, column)
         {
-            return _Ship;
+            _Ship = ship;
         }
-    }
 
-    /// <summary>
-    /// A textual description of the result.
-    /// </summary>
-    /// <value>A textual description of the result.</value>
-    /// <returns>A textual description of the result.</returns>
-    /// <remarks>A textual description of the result.</remarks>
-    public string Text
-    {
-        get
+        /// <summary>
+        /// The column where the attack occurred
+        /// </summary>
+        public int Column
         {
-            return _Text;
+            get
+            {
+                return _Column;
+            }
         }
-    }
 
-    /// <summary>
-    /// The row where the attack occurred
-    /// </summary>
-    public int Row
-    {
-        get
+        /// <summary>
+        /// The row where the attack occurred
+        /// </summary>
+        public int Row
         {
-            return _Row;
+            get
+            {
+                return _Row;
+            }
         }
-    }
 
-    /// <summary>
-    /// The column where the attack occurred
-    /// </summary>
-    public int Column
-    {
-        get
+        /// <summary>
+        /// The ship, if any, involved in this result
+        /// </summary>
+        /// <value>The ship, if any, involved in this result</value>
+        /// <returns>The ship, if any, involved in this result</returns>
+        public Ship Ship
         {
-            return _Column;
+            get
+            {
+                return _Ship;
+            }
         }
-    }
 
-    /// <summary>
-    /// Set the _Value to the PossibleAttack value
-    /// </summary>
-    /// <param name="value">either hit, miss, destroyed, shotalready</param>
-    public AttackResult(ResultOfAttack value, string text, int row, int column)
-    {
-        _Value = value;
-        _Text = text;
-        _Ship = null;
-        _Row = row;
-        _Column = column;
-    }
+        /// <summary>
+        /// A textual description of the result.
+        /// </summary>
+        /// <value>A textual description of the result.</value>
+        /// <returns>A textual description of the result.</returns>
+        /// <remarks>A textual description of the result.</remarks>
+        public string Text
+        {
+            get
+            {
+                return _Text;
+            }
+        }
 
-    /// <summary>
-    /// Set the _Value to the PossibleAttack value, and the _Ship to the ship
-    /// </summary>
-    /// <param name="value">either hit, miss, destroyed, shotalready</param>
-    /// <param name="ship">the ship information</param>
-    public AttackResult(ResultOfAttack value, Ship ship, string text, int row, int column) : this(value, text, row, column)
-    {
-        _Ship = ship;
-    }
+        /// <summary>
+        /// The result of the attack
+        /// </summary>
+        /// <value>The result of the attack</value>
+        /// <returns>The result of the attack</returns>
+        public ResultOfAttack Value
+        {
+            get
+            {
+                return _Value;
+            }
+        }
 
-    /// <summary>
-    /// Displays the textual information about the attack
-    /// </summary>
-    /// <returns>The textual information about the attack</returns>
-    public override string ToString()
-    {
-        if (_Ship == null)
-            return Text;
+        /// <summary>
+        /// Displays the textual information about the attack
+        /// </summary>
+        /// <returns>The textual information about the attack</returns>
+        public override string ToString()
+        {
+            if (_Ship == null)
+                return Text;
 
-        return Text + " " + _Ship.Name;
+            return Text + " " + _Ship.Name;
+        }
     }
 }
