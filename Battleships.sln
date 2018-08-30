@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Battleships", "Battleships", "{AE8BA77A-94B3-4F45-89B3-937A2966C716}"
+	ProjectSection(SolutionItems) = preProject
+		src\DeploymentController.vb = src\DeploymentController.vb
+		src\DiscoveryController.vb = src\DiscoveryController.vb
+		src\EndingGameController.vb = src\EndingGameController.vb
+		src\GameController.vb = src\GameController.vb
+		src\GameLogic.vb = src\GameLogic.vb
+		src\GameResources.vb = src\GameResources.vb
+		src\GameState.vb = src\GameState.vb
+		src\HighScoreController.vb = src\HighScoreController.vb
+		src\MenuController.vb = src\MenuController.vb
+		src\UtilityFunctions.vb = src\UtilityFunctions.vb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{CA3FEED2-5B94-4959-B2EB-E0BC07F758DD}"
+	ProjectSection(SolutionItems) = preProject
+		src\Model\AIHardPlayer.vb = src\Model\AIHardPlayer.vb
+		src\Model\AIMediumPlayer.vb = src\Model\AIMediumPlayer.vb
+		src\Model\AIOption.vb = src\Model\AIOption.vb
+		src\Model\AIPlayer.vb = src\Model\AIPlayer.vb
+		src\Model\AttackResult.vb = src\Model\AttackResult.vb
+		src\Model\BattleShipsGame.vb = src\Model\BattleShipsGame.vb
+		src\Model\Direction.vb = src\Model\Direction.vb
+		src\Model\ISeaGrid.vb = src\Model\ISeaGrid.vb
+		src\Model\Player.vb = src\Model\Player.vb
+		src\Model\ResultOfAttack.vb = src\Model\ResultOfAttack.vb
+		src\Model\SeaGrid.vb = src\Model\SeaGrid.vb
+		src\Model\SeaGridAdapter.vb = src\Model\SeaGridAdapter.vb
+		src\Model\Ship.vb = src\Model\Ship.vb
+		src\Model\ShipName.vb = src\Model\ShipName.vb
+		src\Model\Tile.vb = src\Model\Tile.vb
+		src\Model\TileView.vb = src\Model\TileView.vb
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA3FEED2-5B94-4959-B2EB-E0BC07F758DD} = {AE8BA77A-94B3-4F45-89B3-937A2966C716}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01FE4890-93B4-4A56-A415-E97B3D99F6C6}
+	EndGlobalSection
+EndGlobal
