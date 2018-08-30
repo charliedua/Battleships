@@ -3,6 +3,7 @@
 /// deployed and if all ships are detroyed. A Player can also attach.
 /// </summary>
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
