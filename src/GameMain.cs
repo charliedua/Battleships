@@ -17,8 +17,8 @@ namespace MyGame
             // Game Loop
             do
             {
-                HandleUserInput();
-                DrawScreen();
+                GameController.HandleUserInput();
+                GameController.DrawScreen();
             }
             while (!SwinGame.WindowCloseRequested() == true | CurrentState == GameState.Quitting);
 

@@ -26,11 +26,11 @@ namespace MyGame
         /// </summary>
         public static void DrawEndOfGame()
         {
-            Rectangle toDraw;
+            Rectangle toDraw = new Rectangle();
             string whatShouldIPrint;
 
-            DrawField(ComputerPlayer.PlayerGrid, ComputerPlayer, true);
-            DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawField(ComputerPlayer.PlayerGrid, ComputerPlayer, true);
+            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
 
             toDraw.X = 0;
             toDraw.Y = 250;
@@ -42,7 +42,7 @@ namespace MyGame
             else
                 whatShouldIPrint = "-- WINNER --";
 
-            SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
         }
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace MyGame
         /// </summary>
         public static void HandleEndOfGameInput()
         {
-            if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.VK_RETURN) || SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
+            if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.ReturnKey) || SwinGame.KeyTyped(KeyCode.EscapeKey))
             {
-                ReadHighScore(HumanPlayer.Score);
-                EndCurrentState();
+                HighScoreController.ReadHighScore(HumanPlayer.Score);
+                GameController.EndCurrentState();
             }
         }
     }

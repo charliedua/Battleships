@@ -136,19 +136,14 @@ namespace MyGame
                 {
                     colLeft = left + (cellGap + cellWidth) * col;
 
-                    Color fillColor;
+                    // EDIT: made here
+                    Color fillColor = new Color(0);
                     bool draw;
 
                     draw = true;
 
                     switch (grid.Item(row, col))
                     {
-                        case TileView.Ship:
-                            {
-                                draw = false;
-                                break;
-                            }
-
                         case TileView.Miss:
                             {
                                 if (small)
@@ -167,8 +162,14 @@ namespace MyGame
                                 break;
                             }
 
-                        case TileView.Sea:
                         case TileView.Ship:
+                            {
+                                draw = false;
+                                if (small)
+                                    fillColor = SMALL_SEA;
+                                break;
+                            }
+                        case TileView.Sea:
                             {
                                 if (small)
                                     fillColor = SMALL_SEA;
@@ -249,7 +250,7 @@ namespace MyGame
         /// </summary>
         public static void DrawMessage()
         {
-            SwinGame.DrawText(Message, MESSAGE_COLOR, GameResources.GameResources.GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
+            SwinGame.DrawText(Message, MESSAGE_COLOR, GameResources.GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
         }
 
         /// <summary>
@@ -328,7 +329,7 @@ namespace MyGame
             foreach (Sprite s in _Animations)
             {
                 SwinGame.UpdateSprite(s);
-                if (s.animationHasEnded)
+                if (s.AnimationHasEnded)
                     ended.Add(s);
             }
 
@@ -351,7 +352,7 @@ namespace MyGame
             for (i = 1; i <= ANIMATION_CELLS * FRAMES_PER_CELL; i++)
             {
                 UpdateAnimations();
-                DrawScreen();
+                GameController.DrawScreen();
             }
         }
     }

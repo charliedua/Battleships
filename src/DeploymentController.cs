@@ -54,15 +54,15 @@ namespace MyGame
         /// </remarks>
         public static void HandleDeploymentInput()
         {
-            if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
-                AddNewState(GameState.ViewingGameMenu);
+            if (SwinGame.KeyTyped(KeyCode.EscapeKey))
+                GameController.AddNewState(GameState.ViewingGameMenu);
 
-            if (SwinGame.KeyTyped(KeyCode.VK_UP) | SwinGame.KeyTyped(KeyCode.VK_DOWN))
+            if (SwinGame.KeyTyped(KeyCode.UpKey) | SwinGame.KeyTyped(KeyCode.DownKey))
                 _currentDirection = Direction.UpDown;
-            if (SwinGame.KeyTyped(KeyCode.VK_LEFT) | SwinGame.KeyTyped(KeyCode.VK_RIGHT))
+            if (SwinGame.KeyTyped(KeyCode.LeftKey) | SwinGame.KeyTyped(KeyCode.RightKey))
                 _currentDirection = Direction.LeftRight;
 
-            if (SwinGame.KeyTyped(KeyCode.VK_R))
+            if (SwinGame.KeyTyped(KeyCode.RKey))
                 HumanPlayer.RandomizeDeployment();
 
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
@@ -74,13 +74,13 @@ namespace MyGame
                 else
                     DoDeployClick();
 
-                if (HumanPlayer.ReadyToDeploy & IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
-                    EndDeployment();
-                else if (IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                if (HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+                    GameController.EndDeployment();
+                else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                     _currentDirection = Direction.LeftRight;
-                else if (IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                     _currentDirection = Direction.LeftRight;
-                else if (IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
                     HumanPlayer.RandomizeDeployment();
             }
         }
@@ -128,7 +128,7 @@ namespace MyGame
         /// </summary>
         public static void DrawDeployment()
         {
-            DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
+            UtilityFunctions.DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
 
             // Draw the Left/Right and Up/Down buttons
             if (_currentDirection == Direction.LeftRight)
@@ -167,7 +167,7 @@ namespace MyGame
                 int i;
                 i = Int(sn) - 1;
 
-                if (IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
+                if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
                     return sn;
             }
 

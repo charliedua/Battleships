@@ -69,7 +69,7 @@ namespace MyGame
             }
         }
 
-        public static GameController()
+        static GameController()
         {
             // bottom state will be quitting. If player exits main menu then the game is over
             _state.Push(GameState.Quitting);
@@ -149,21 +149,21 @@ namespace MyGame
         private static void PlayHitSequence(int row, int column, bool showAnimation)
         {
             if (showAnimation)
-                AddExplosion(row, column);
+                UtilityFunctions.AddExplosion(row, column);
 
             Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
 
-            DrawAnimationSequence();
+            UtilityFunctions.DrawAnimationSequence();
         }
 
         private static void PlayMissSequence(int row, int column, bool showAnimation)
         {
             if (showAnimation)
-                AddSplash(row, column);
+                UtilityFunctions.AddSplash(row, column);
 
             Audio.PlaySoundEffect(GameResources.GameSound("Miss"));
 
-            DrawAnimationSequence();
+            UtilityFunctions.DrawAnimationSequence();
         }
 
         /// <summary>
@@ -320,48 +320,48 @@ namespace MyGame
             {
                 case GameState.ViewingMainMenu:
                     {
-                        HandleMainMenuInput();
+                        MenuController.HandleMainMenuInput();
                         break;
                     }
 
                 case GameState.ViewingGameMenu:
                     {
-                        HandleGameMenuInput();
+                        MenuController.HandleGameMenuInput();
                         break;
                     }
 
                 case GameState.AlteringSettings:
                     {
-                        HandleSetupMenuInput();
+                        MenuController.HandleSetupMenuInput();
                         break;
                     }
 
                 case GameState.Deploying:
                     {
-                        HandleDeploymentInput();
+                        DeploymentController.HandleDeploymentInput();
                         break;
                     }
 
                 case GameState.Discovering:
                     {
-                        HandleDiscoveryInput();
+                        DiscoveryController.HandleDiscoveryInput();
                         break;
                     }
 
                 case GameState.EndingGame:
                     {
-                        HandleEndOfGameInput();
+                        EndingGameController.HandleEndOfGameInput();
                         break;
                     }
 
                 case GameState.ViewingHighScores:
                     {
-                        HandleHighScoreInput();
+                        HighScoreController.HandleHighScoreInput();
                         break;
                     }
             }
 
-            UpdateAnimations();
+            UtilityFunctions.UpdateAnimations();
         }
 
         /// <summary>
@@ -372,54 +372,54 @@ namespace MyGame
         /// </remarks>
         public static void DrawScreen()
         {
-            DrawBackground();
+            UtilityFunctions.DrawBackground();
 
             switch (CurrentState)
             {
                 case GameState.ViewingMainMenu:
                     {
-                        DrawMainMenu();
+                        MenuController.DrawMainMenu();
                         break;
                     }
 
                 case GameState.ViewingGameMenu:
                     {
-                        DrawGameMenu();
+                        MenuController.DrawGameMenu();
                         break;
                     }
 
                 case GameState.AlteringSettings:
                     {
-                        DrawSettings();
+                        MenuController.DrawSettings();
                         break;
                     }
 
                 case GameState.Deploying:
                     {
-                        DrawDeployment();
+                        DeploymentController.DrawDeployment();
                         break;
                     }
 
                 case GameState.Discovering:
                     {
-                        DrawDiscovery();
+                        DiscoveryController.DrawDiscovery();
                         break;
                     }
 
                 case GameState.EndingGame:
                     {
-                        DrawEndOfGame();
+                        EndingGameController.DrawEndOfGame();
                         break;
                     }
 
                 case GameState.ViewingHighScores:
                     {
-                        DrawHighScores();
+                        HighScoreController.DrawHighScores();
                         break;
                     }
             }
 
-            DrawAnimations();
+            UtilityFunctions.DrawAnimations();
 
             SwinGame.RefreshScreen();
         }
