@@ -10,9 +10,9 @@ namespace MyGame
             SwinGame.OpenGraphicsWindow("Battle Ships", 800, 600);
 
             // Load Resources
-            LoadResources();
+            GameResources.LoadResources();
 
-            SwinGame.PlayMusic(GameMusic("Background"));
+            SwinGame.PlayMusic(GameResources.GameMusic("Background"));
 
             // Game Loop
             do
@@ -25,7 +25,7 @@ namespace MyGame
             SwinGame.StopMusic();
 
             // Free Resources and Close Audio, to end the program.
-            FreeResources();
+            GameResources.FreeResources();
         }
     }
 }

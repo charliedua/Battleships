@@ -95,7 +95,7 @@ namespace MyGame
         /// <param name="sound">Name of sound</param>
         /// <returns>The sound with this name</returns>
 
-        public static SoundEffect GameResources.GameSound(string sound)
+        public static SoundEffect GameSound(string sound)
         {
             return _Sounds[sound];
         }
