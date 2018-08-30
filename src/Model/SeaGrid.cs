@@ -1,40 +1,28 @@
-namespace MyGame {
-     // '' <summary>
-     // '' The SeaGrid is the grid upon which the ships are deployed.
-     // '' </summary>
-     // '' <remarks>
-     // '' The grid is viewable via the ISeaGrid interface as a read only
-     // '' grid. This can be used in conjuncture with the SeaGridAdapter to 
-     // '' mask the position of the ships.
-     // '' </remarks>
-public class SeaGrid : ISeaGrid
+using System;
+using System.Collections.Generic;
+using SwinGameSDK;
+
+namespace MyGame
+{
+    /// <summary>
+    /// The SeaGrid is the grid upon which the ships are deployed.
+    /// </summary>
+    /// <remarks>
+    /// The grid is viewable via the ISeaGrid interface as a read only grid. This can be used in
+    /// conjuncture with the SeaGridAdapter to mask the position of the ships.
+    /// </remarks>
+    public class SeaGrid : ISeaGrid
     {
-
-        private const int _WIDTH = 10;
-
         private const int _HEIGHT = 10;
-
+        private const int _WIDTH = 10;
         private Dictionary<ShipName, Ship> _Ships;
 
         private int _ShipsKilled = 0;
 
-        // '' <summary>
-        // '' The sea grid has changed and should be redrawn.
-        // '' </summary>
+        /// <summary>
+        /// The sea grid has changed and should be redrawn.
+        /// </summary>
         public event EventHandler Changed;
-
-        // '' <summary>
-        // '' The width of the sea grid.
-        // '' </summary>
-        // '' <value>The width of the sea grid.</value>
-        // '' <returns>The width of the sea grid.</returns>
-        public int Width
-        {
-            get
-            {
-                return _WIDTH;
-            }
-        }
 
         public int Height
         {
@@ -52,18 +40,27 @@ public class SeaGrid : ISeaGrid
             }
         }
 
+        /// <summary>
+        /// The width of the sea grid.
+        /// </summary>
+        /// <value>The width of the sea grid.</value>
+        /// <returns>The width of the sea grid.</returns>
+        public int Width
+        {
+            get
+            {
+                return _WIDTH;
+            }
+        }
+
         public TileView this[int x, int y]
         {
         }
     }
-    Endclass Unknown
-    {
-    }
 
-
-    // '' <summary>
-    // '' AllDeployed checks if all the ships are deployed
-    // '' </summary>
+    /// <summary>
+    /// AllDeployed checks if all the ships are deployed
+    /// </summary>
     public bool AllDeployed
     {
         get
@@ -74,7 +71,6 @@ public class SeaGrid : ISeaGrid
                 {
                     return false;
                 }
-
             }
 
             return true;
@@ -93,19 +89,18 @@ public class SeaGrid : ISeaGrid
             {
                 _GameTiles(i, j) = new Tile(i, j, null);
             }
-
         }
 
         _Ships = ships;
     }
 
-    // '' <summary>
-    // '' MoveShips allows for ships to be placed on the seagrid
-    // '' </summary>
-    // '' <param name="row">the row selected</param>
-    // '' <param name="col">the column selected</param>
-    // '' <param name="ship">the ship selected</param>
-    // '' <param name="direction">the direction the ship is going</param>
+    /// <summary>
+    /// MoveShips allows for ships to be placed on the seagrid
+    /// </summary>
+    /// <param name="row">the row selected</param>
+    /// <param name="col">the column selected</param>
+    /// <param name="ship">the ship selected</param>
+    /// <param name="direction">the direction the ship is going</param>
     public void MoveShip(int row, int col, ShipName ship, Direction direction)
     {
         Ship newShip = _Ships[ship];
@@ -113,13 +108,13 @@ public class SeaGrid : ISeaGrid
         AddShip(row, col, direction, newShip);
     }
 
-    // '' <summary>
-    // '' AddShip add a ship to the SeaGrid
-    // '' </summary>
-    // '' <param name="row">row coordinate</param>
-    // '' <param name="col">col coordinate</param>
-    // '' <param name="direction">direction of ship</param>
-    // '' <param name="newShip">the ship</param>
+    /// <summary>
+    /// AddShip add a ship to the SeaGrid
+    /// </summary>
+    /// <param name="row">row coordinate</param>
+    /// <param name="col">col coordinate</param>
+    /// <param name="direction">direction of ship</param>
+    /// <param name="newShip">the ship</param>
     private void AddShip(int row, int col, Direction direction, Ship newShip)
     {
         try
@@ -170,16 +165,14 @@ public class SeaGrid : ISeaGrid
         {
             Changed(this, EventArgs.Empty);
         }
-
     }
 
-    // '' <summary>
-    // '' HitTile hits a tile at a row/col, and whatever tile has been hit, a
-    // '' result will be displayed.
-    // '' </summary>
-    // '' <param name="row">the row at which is being shot</param>
-    // '' <param name="col">the cloumn at which is being shot</param>
-    // '' <returns>An attackresult (hit, miss, sunk, shotalready)</returns>
+    /// <summary>
+    /// HitTile hits a tile at a row/col, and whatever tile has been hit, a result will be displayed.
+    /// </summary>
+    /// <param name="row">the row at which is being shot</param>
+    /// <param name="col">the cloumn at which is being shot</param>
+    /// <returns>An attackresult (hit, miss, sunk, shotalready)</returns>
     public AttackResult HitTile(int row, int col)
     {
         try
@@ -214,7 +207,5 @@ public class SeaGrid : ISeaGrid
         {
             Changed(this, EventArgs.Empty);
         }
-
     }
 }
-
