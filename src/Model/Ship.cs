@@ -24,68 +24,21 @@ namespace MyGame
 {
     public class Ship
     {
-        private ShipName _shipName;
-        private int _sizeOfShip;
-        private int _hitsTaken = 0;
-        private List<Tile> _tiles;
-        private int _row;
         private int _col;
         private Direction _direction;
+        private int _hitsTaken = 0;
+        private int _row;
+        private ShipName _shipName;
+        private int _sizeOfShip;
+        private List<Tile> _tiles;
 
-        /// <summary>
-        /// The type of ship
-        /// </summary>
-        /// <value>The type of ship</value>
-        /// <returns>The type of ship</returns>
-        public string Name
+        public Ship(ShipName ship)
         {
-            get
-            {
-                if (_shipName == ShipName.AircraftCarrier)
-                    return "Aircraft Carrier";
+            _shipName = ship;
+            _tiles = new List<Tile>();
 
-                return _shipName.ToString();
-            }
-        }
-
-        /// <summary>
-        /// The number of cells that this ship occupies.
-        /// </summary>
-        /// <value>The number of hits the ship can take</value>
-        /// <returns>The number of hits the ship can take</returns>
-        public int Size
-        {
-            get
-            {
-                return _sizeOfShip;
-            }
-        }
-
-        /// <summary>
-        /// The number of hits that the ship has taken.
-        /// </summary>
-        /// <value>The number of hits the ship has taken.</value>
-        /// <returns>The number of hits the ship has taken</returns>
-        /// <remarks>When this equals Size the ship is sunk</remarks>
-        public int Hits
-        {
-            get
-            {
-                return _hitsTaken;
-            }
-        }
-
-        /// <summary>
-        /// The row location of the ship
-        /// </summary>
-        /// <value>The topmost location of the ship</value>
-        /// <returns>the row of the ship</returns>
-        public int Row
-        {
-            get
-            {
-                return _row;
-            }
+            // gets the ship size from the enumarator
+            _sizeOfShip = _shipName;
         }
 
         public int Column
@@ -104,37 +57,18 @@ namespace MyGame
             }
         }
 
-        public Ship(ShipName ship)
-        {
-            _shipName = ship;
-            _tiles = new List<Tile>();
-
-            // gets the ship size from the enumarator
-            _sizeOfShip = _shipName;
-        }
-
         /// <summary>
-        /// Add tile adds the ship tile
+        /// The number of hits that the ship has taken.
         /// </summary>
-        /// <param name="tile">one of the tiles the ship is on</param>
-        public void AddTile(Tile tile)
+        /// <value>The number of hits the ship has taken.</value>
+        /// <returns>The number of hits the ship has taken</returns>
+        /// <remarks>When this equals Size the ship is sunk</remarks>
+        public int Hits
         {
-            _tiles.Add(tile);
-        }
-
-        /// <summary>
-        /// Remove clears the tile back to a sea tile
-        /// </summary>
-        public void Remove()
-        {
-            foreach (Tile tile in _tiles)
-                tile.ClearShip();
-            _tiles.Clear();
-        }
-
-        public void Hit()
-        {
-            _hitsTaken = _hitsTaken + 1;
+            get
+            {
+                return _hitsTaken;
+            }
         }
 
         /// <summary>
@@ -155,6 +89,72 @@ namespace MyGame
             {
                 return Hits == Size;
             }
+        }
+
+        /// <summary>
+        /// The type of ship
+        /// </summary>
+        /// <value>The type of ship</value>
+        /// <returns>The type of ship</returns>
+        public string Name
+        {
+            get
+            {
+                if (_shipName == ShipName.AircraftCarrier)
+                    return "Aircraft Carrier";
+
+                return _shipName.ToString();
+            }
+        }
+
+        /// <summary>
+        /// The row location of the ship
+        /// </summary>
+        /// <value>The topmost location of the ship</value>
+        /// <returns>the row of the ship</returns>
+        public int Row
+        {
+            get
+            {
+                return _row;
+            }
+        }
+
+        /// <summary>
+        /// The number of cells that this ship occupies.
+        /// </summary>
+        /// <value>The number of hits the ship can take</value>
+        /// <returns>The number of hits the ship can take</returns>
+        public int Size
+        {
+            get
+            {
+                return _sizeOfShip;
+            }
+        }
+
+        /// <summary>
+        /// Add tile adds the ship tile
+        /// </summary>
+        /// <param name="tile">one of the tiles the ship is on</param>
+        public void AddTile(Tile tile)
+        {
+            _tiles.Add(tile);
+        }
+
+        public void Hit()
+        {
+            _hitsTaken = _hitsTaken + 1;
+        }
+
+        /// <summary>
+        /// Remove clears the tile back to a sea tile
+        /// </summary>
+        public void Remove()
+        {
+            foreach (Tile tile in _tiles)
+                tile.ClearShip();
+            _tiles.Clear();
         }
 
         /// <summary>

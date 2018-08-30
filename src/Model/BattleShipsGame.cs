@@ -22,6 +22,10 @@ namespace MyGame
 {
     public class BattleShipsGame
     {
+        private int _playerIndex = 0;
+
+        private Player[] _players = new Player[3];
+
         /// <summary>
         /// The attack delegate type is used to send notifications of the end of an
         /// attack by a player or the AI.
@@ -37,9 +41,6 @@ namespace MyGame
         /// This is used by the UI to play sound effects etc.
         /// </remarks>
         public event AttackCompletedHandler AttackCompleted;
-
-        private Player[] _players = new Player[3];
-        private int _playerIndex = 0;
 
         /// <summary>
         /// The current player.
@@ -74,16 +75,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Assigns each player the other's grid as the enemy grid. This allows each player
-        /// to examine the details visable on the other's sea grid.
-        /// </summary>
-        private void CompleteDeployment()
-        {
-            _players[0].Enemy = new SeaGridAdapter(_players[1].PlayerGrid);
-            _players[1].Enemy = new SeaGridAdapter(_players[0].PlayerGrid);
-        }
-
-        /// <summary>
         /// Shoot will swap between players and check if a player has been killed.
         /// It also allows the current player to hit on the enemygrid.
         /// </summary>
@@ -108,6 +99,16 @@ namespace MyGame
                 _playerIndex = otherPlayer;
 
             return newAttack;
+        }
+
+        /// <summary>
+        /// Assigns each player the other's grid as the enemy grid. This allows each player
+        /// to examine the details visable on the other's sea grid.
+        /// </summary>
+        private void CompleteDeployment()
+        {
+            _players[0].Enemy = new SeaGridAdapter(_players[1].PlayerGrid);
+            _players[1].Enemy = new SeaGridAdapter(_players[0].PlayerGrid);
         }
     }
 }

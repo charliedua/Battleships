@@ -16,100 +16,7 @@ namespace MyGame
         private const int NAME_WIDTH = 3;
         private const int SCORES_LEFT = 490;
 
-        /// <summary>
-        /// The score structure is used to keep the name and
-        /// score of the top players together.
-        /// </summary>
-        private struct Score : IComparable
-        {
-            public string Name;
-            public int Value;
-
-            /// <summary>
-            /// Allows scores to be compared to facilitate sorting
-            /// </summary>
-            /// <param name="obj">the object to compare to</param>
-            /// <returns>a value that indicates the sort order</returns>
-            public int CompareTo(object obj)
-            {
-                if (obj is Score)
-                {
-                    Score other = (Score)obj;
-
-                    return other.Value - this.Value;
-                }
-                else
-                    return 0;
-            }
-        }
-
         private static List<Score> _Scores = new List<Score>();
-
-        /// <summary>
-        /// Loads the scores from the highscores text file.
-        /// </summary>
-        /// <remarks>
-        /// The format is
-        /// # of scores
-        /// NNNSSS
-        ///
-        /// Where NNN is the name and SSS is the score
-        /// </remarks>
-        private static void LoadScores()
-        {
-            string filename;
-            filename = SwinGame.PathToResource("highscores.txt");
-
-            StreamReader input;
-            input = new StreamReader(filename);
-
-            // Read in the # of scores
-            int numScores;
-            numScores = Convert.ToInt32(input.ReadLine());
-
-            _Scores.Clear();
-
-            int i;
-
-            for (i = 1; i <= numScores; i++)
-            {
-                Score s;
-                string line;
-
-                line = input.ReadLine();
-
-                s.Name = line.Substring(0, NAME_WIDTH);
-                s.Value = Convert.ToInt32(line.Substring(NAME_WIDTH));
-                _Scores.Add(s);
-            }
-            input.Close();
-        }
-
-        /// <summary>
-        /// Saves the scores back to the highscores text file.
-        /// </summary>
-        /// <remarks>
-        /// The format is
-        /// # of scores
-        /// NNNSSS
-        ///
-        /// Where NNN is the name and SSS is the score
-        /// </remarks>
-        private static void SaveScores()
-        {
-            string filename;
-            filename = SwinGame.PathToResource("highscores.txt");
-
-            StreamWriter output;
-            output = new StreamWriter(filename);
-
-            output.WriteLine(_Scores.Count);
-
-            foreach (Score s in _Scores)
-                output.WriteLine(s.Name + s.Value);
-
-            output.Close();
-        }
 
         /// <summary>
         /// Draws the high scores to the screen.
@@ -199,6 +106,99 @@ namespace MyGame
                 _Scores.Sort();
 
                 GameController.EndCurrentState();
+            }
+        }
+
+        /// <summary>
+        /// Loads the scores from the highscores text file.
+        /// </summary>
+        /// <remarks>
+        /// The format is
+        /// # of scores
+        /// NNNSSS
+        ///
+        /// Where NNN is the name and SSS is the score
+        /// </remarks>
+        private static void LoadScores()
+        {
+            string filename;
+            filename = SwinGame.PathToResource("highscores.txt");
+
+            StreamReader input;
+            input = new StreamReader(filename);
+
+            // Read in the # of scores
+            int numScores;
+            numScores = Convert.ToInt32(input.ReadLine());
+
+            _Scores.Clear();
+
+            int i;
+
+            for (i = 1; i <= numScores; i++)
+            {
+                Score s;
+                string line;
+
+                line = input.ReadLine();
+
+                s.Name = line.Substring(0, NAME_WIDTH);
+                s.Value = Convert.ToInt32(line.Substring(NAME_WIDTH));
+                _Scores.Add(s);
+            }
+            input.Close();
+        }
+
+        /// <summary>
+        /// Saves the scores back to the highscores text file.
+        /// </summary>
+        /// <remarks>
+        /// The format is
+        /// # of scores
+        /// NNNSSS
+        ///
+        /// Where NNN is the name and SSS is the score
+        /// </remarks>
+        private static void SaveScores()
+        {
+            string filename;
+            filename = SwinGame.PathToResource("highscores.txt");
+
+            StreamWriter output;
+            output = new StreamWriter(filename);
+
+            output.WriteLine(_Scores.Count);
+
+            foreach (Score s in _Scores)
+                output.WriteLine(s.Name + s.Value);
+
+            output.Close();
+        }
+
+        /// <summary>
+        /// The score structure is used to keep the name and
+        /// score of the top players together.
+        /// </summary>
+        private struct Score : IComparable
+        {
+            public string Name;
+            public int Value;
+
+            /// <summary>
+            /// Allows scores to be compared to facilitate sorting
+            /// </summary>
+            /// <param name="obj">the object to compare to</param>
+            /// <returns>a value that indicates the sort order</returns>
+            public int CompareTo(object obj)
+            {
+                if (obj is Score)
+                {
+                    Score other = (Score)obj;
+
+                    return other.Value - this.Value;
+                }
+                else
+                    return 0;
             }
         }
     }

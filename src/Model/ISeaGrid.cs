@@ -20,14 +20,12 @@ namespace MyGame
 {
     public interface ISeaGrid
     {
-        int Width { get; }
-
-        int Height { get; }
-
         /// <summary>
         /// Indicates that the grid has changed.
         /// </summary>
         event EventHandler Changed;
+
+        int Height { get; }
 
         /// <summary>
         /// Provides access to the given row/column
@@ -37,6 +35,8 @@ namespace MyGame
         /// <value>what the player can see at that location</value>
         /// <returns>what the player can see at that location</returns>
         TileView Item { get; }
+
+        int Width { get; }
 
         /// <summary>
         /// Mark the indicated tile as shot.

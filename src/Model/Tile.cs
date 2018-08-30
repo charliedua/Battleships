@@ -20,25 +20,37 @@ namespace MyGame
 {
     public class Tile
     {
+        private readonly int _ColumnValue;
         private readonly int _RowValue;        // the row value of the tile
-        private readonly int _ColumnValue;     // the column value of the tile
+
+                                               // the column value of the tile
         private Ship _Ship = null/* TODO Change to default(_) if this is not a reference type */;     // the ship the tile belongs to
+
         private bool _Shot = false;    // the tile has been shot at
 
         /// <summary>
-        /// Has the tile been shot?
+        /// The tile constructor will know where it is on the grid, and is its a ship
         /// </summary>
-        /// <value>indicate if the tile has been shot</value>
-        /// <returns>true if the tile was shot</returns>
-        public bool Shot
+        /// <param name="row">the row on the grid</param>
+        /// <param name="col">the col on the grid</param>
+        /// <param name="ship">what ship it is</param>
+        public Tile(int row, int col, Ship ship)
+        {
+            _RowValue = row;
+            _ColumnValue = col;
+            _Ship = ship;
+        }
+
+        /// <summary>
+        /// The column of the tile in the grid
+        /// </summary>
+        /// <value>the column of the tile in the grid</value>
+        /// <returns>the column of the tile in the grid</returns>
+        public int Column
         {
             get
             {
-                return _Shot;
-            }
-            set
-            {
-                _Shot = value;
+                return _ColumnValue;
             }
         }
 
@@ -52,19 +64,6 @@ namespace MyGame
             get
             {
                 return _RowValue;
-            }
-        }
-
-        /// <summary>
-        /// The column of the tile in the grid
-        /// </summary>
-        /// <value>the column of the tile in the grid</value>
-        /// <returns>the column of the tile in the grid</returns>
-        public int Column
-        {
-            get
-            {
-                return _ColumnValue;
             }
         }
 
@@ -91,24 +90,20 @@ namespace MyGame
         }
 
         /// <summary>
-        /// The tile constructor will know where it is on the grid, and is its a ship
+        /// Has the tile been shot?
         /// </summary>
-        /// <param name="row">the row on the grid</param>
-        /// <param name="col">the col on the grid</param>
-        /// <param name="ship">what ship it is</param>
-        public Tile(int row, int col, Ship ship)
+        /// <value>indicate if the tile has been shot</value>
+        /// <returns>true if the tile was shot</returns>
+        public bool Shot
         {
-            _RowValue = row;
-            _ColumnValue = col;
-            _Ship = ship;
-        }
-
-        /// <summary>
-        /// Clearship will remove the ship from the tile
-        /// </summary>
-        public void ClearShip()
-        {
-            _Ship = null;
+            get
+            {
+                return _Shot;
+            }
+            set
+            {
+                _Shot = value;
+            }
         }
 
         /// <summary>
@@ -136,6 +131,14 @@ namespace MyGame
                     // if there is a ship and it hasn't been hit
                     return TileView.Ship;
             }
+        }
+
+        /// <summary>
+        /// Clearship will remove the ship from the tile
+        /// </summary>
+        public void ClearShip()
+        {
+            _Ship = null;
         }
 
         /// <summary>

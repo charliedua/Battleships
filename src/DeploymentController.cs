@@ -20,29 +20,57 @@ namespace MyGame
 {
     internal static class DeploymentController
     {
-        private const int SHIPS_TOP = 98;
-        private const int SHIPS_LEFT = 20;
-        private const int SHIPS_HEIGHT = 90;
-        private const int SHIPS_WIDTH = 300;
-
-        private const int TOP_BUTTONS_TOP = 72;
-        private const int TOP_BUTTONS_HEIGHT = 46;
-
+        private const int DIR_BUTTONS_WIDTH = 47;
+        private const int LEFT_RIGHT_BUTTON_LEFT = 350;
         private const int PLAY_BUTTON_LEFT = 693;
         private const int PLAY_BUTTON_WIDTH = 80;
-
-        private const int UP_DOWN_BUTTON_LEFT = 410;
-        private const int LEFT_RIGHT_BUTTON_LEFT = 350;
-
         private const int RANDOM_BUTTON_LEFT = 547;
         private const int RANDOM_BUTTON_WIDTH = 51;
-
-        private const int DIR_BUTTONS_WIDTH = 47;
+        private const int SHIPS_HEIGHT = 90;
+        private const int SHIPS_LEFT = 20;
+        private const int SHIPS_TOP = 98;
+        private const int SHIPS_WIDTH = 300;
 
         private const int TEXT_OFFSET = 5;
-
+        private const int TOP_BUTTONS_HEIGHT = 46;
+        private const int TOP_BUTTONS_TOP = 72;
+        private const int UP_DOWN_BUTTON_LEFT = 410;
         private static Direction _currentDirection = Direction.UpDown;
         private static ShipName _selectedShip = ShipName.Tug;
+
+        /// <summary>
+        /// Draws the deployment screen showing the field and the ships
+        /// that the player can deploy.
+        /// </summary>
+        public static void DrawDeployment()
+        {
+            UtilityFunctions.DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
+
+            // Draw the Left/Right and Up/Down buttons
+            if (_currentDirection == Direction.LeftRight)
+                SwinGame.DrawBitmap(GameResources.GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+            else
+                SwinGame.DrawBitmap(GameResources.GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+            // DrawShips
+            foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
+            {
+                int i;
+                i = Int(sn) - 1;
+                if (i >= 0)
+                {
+                    if (sn == _selectedShip)
+                        SwinGame.DrawBitmap(GameResources.GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
+                }
+            }
+
+            if (HumanPlayer.ReadyToDeploy)
+                SwinGame.DrawBitmap(GameResources.GameImage("PlayButton"), PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+            SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+            UtilityFunctions.DrawMessage();
+        }
 
         /// <summary>
         /// Handles user input for the Deployment phase of the game.
@@ -120,40 +148,6 @@ namespace MyGame
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Draws the deployment screen showing the field and the ships
-        /// that the player can deploy.
-        /// </summary>
-        public static void DrawDeployment()
-        {
-            UtilityFunctions.DrawField(HumanPlayer.PlayerGrid, HumanPlayer, true);
-
-            // Draw the Left/Right and Up/Down buttons
-            if (_currentDirection == Direction.LeftRight)
-                SwinGame.DrawBitmap(GameResources.GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
-            else
-                SwinGame.DrawBitmap(GameResources.GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
-
-            // DrawShips
-            foreach (ShipName sn in Enum.GetValues(typeof(ShipName)))
-            {
-                int i;
-                i = Int(sn) - 1;
-                if (i >= 0)
-                {
-                    if (sn == _selectedShip)
-                        SwinGame.DrawBitmap(GameResources.GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
-                }
-            }
-
-            if (HumanPlayer.ReadyToDeploy)
-                SwinGame.DrawBitmap(GameResources.GameImage("PlayButton"), PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP);
-
-            SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
-
-            UtilityFunctions.DrawMessage();
         }
 
         /// <summary>

@@ -33,13 +33,19 @@ namespace MyGame
         }
 
         /// <summary>
-        /// MyGrid_Changed causes the grid to be redrawn by raising a changed event
+        /// Indicates that the grid has been changed
         /// </summary>
-        /// <param name="sender">the object that caused the change</param>
-        /// <param name="e">what needs to be redrawn</param>
-        private void MyGrid_Changed(object sender, EventArgs e)
+        public event EventHandler Changed;
+
+        /// <summary>
+        /// Get the height of the tile
+        /// </summary>
+        public int Height
         {
-            Changed?.Invoke(this, e);
+            get
+            {
+                return _MyGrid.Height;
+            }
         }
 
         /// <summary>
@@ -62,11 +68,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Indicates that the grid has been changed
-        /// </summary>
-        public event EventHandler Changed;
-
-        /// <summary>
         /// Get the width of a tile
         /// </summary>
         public int Width
@@ -74,17 +75,6 @@ namespace MyGame
             get
             {
                 return _MyGrid.Width;
-            }
-        }
-
-        /// <summary>
-        /// Get the height of the tile
-        /// </summary>
-        public int Height
-        {
-            get
-            {
-                return _MyGrid.Height;
             }
         }
 
@@ -97,6 +87,16 @@ namespace MyGame
         public AttackResult HitTile(int row, int col)
         {
             return _MyGrid.HitTile(row, col);
+        }
+
+        /// <summary>
+        /// MyGrid_Changed causes the grid to be redrawn by raising a changed event
+        /// </summary>
+        /// <param name="sender">the object that caused the change</param>
+        /// <param name="e">what needs to be redrawn</param>
+        private void MyGrid_Changed(object sender, EventArgs e)
+        {
+            Changed?.Invoke(this, e);
         }
     }
 }

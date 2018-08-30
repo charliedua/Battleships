@@ -23,6 +23,14 @@ namespace MyGame
 {
     public class AIMediumPlayer : AIPlayer
     {
+        private AIStates _CurrentState = AIStates.Searching;
+
+        private Stack<Location> _Targets = new Stack<Location>();
+
+        public AIMediumPlayer(BattleShipsGame controller) : base(controller)
+        {
+        }
+
         /// <summary>
         /// Private enumarator for AI states. currently there are two states,
         /// the AI can be searching for a ship, or if it has found a ship it will
@@ -32,13 +40,6 @@ namespace MyGame
         {
             Searching,
             TargetingShip
-        }
-
-        private AIStates _CurrentState = AIStates.Searching;
-        private Stack<Location> _Targets = new Stack<Location>();
-
-        public AIMediumPlayer(BattleShipsGame controller) : base(controller)
-        {
         }
 
         /// <summary>
@@ -79,33 +80,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// TargetCoords is used when a ship has been hit and it will try and destroy
-        /// this ship
-        /// </summary>
-        /// <param name="row">row generated around the hit tile</param>
-        /// <param name="column">column generated around the hit tile</param>
-        private void TargetCoords(ref int row, ref int column)
-        {
-            Location l = _Targets.Pop();
-
-            if ((_Targets.Count == 0))
-                _CurrentState = AIStates.Searching;
-            row = l.Row;
-            column = l.Column;
-        }
-
-        /// <summary>
-        /// SearchCoords will randomly generate shots within the grid as long as its not hit that tile already
-        /// </summary>
-        /// <param name="row">the generated row</param>
-        /// <param name="column">the generated column</param>
-        private void SearchCoords(ref int row, ref int column)
-        {
-            row = _Random.Next(0, EnemyGrid.Height);
-            column = _Random.Next(0, EnemyGrid.Width);
-        }
-
-        /// <summary>
         /// ProcessShot will be called uppon when a ship is found.
         /// It will create a stack with targets it will try to hit. These targets
         /// will be around the tile that has been hit.
@@ -137,6 +111,33 @@ namespace MyGame
             if (row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid.Item(row, column) == TileView.Sea)
 
                 _Targets.Push(new Location(row, column));
+        }
+
+        /// <summary>
+        /// SearchCoords will randomly generate shots within the grid as long as its not hit that tile already
+        /// </summary>
+        /// <param name="row">the generated row</param>
+        /// <param name="column">the generated column</param>
+        private void SearchCoords(ref int row, ref int column)
+        {
+            row = _Random.Next(0, EnemyGrid.Height);
+            column = _Random.Next(0, EnemyGrid.Width);
+        }
+
+        /// <summary>
+        /// TargetCoords is used when a ship has been hit and it will try and destroy
+        /// this ship
+        /// </summary>
+        /// <param name="row">row generated around the hit tile</param>
+        /// <param name="column">column generated around the hit tile</param>
+        private void TargetCoords(ref int row, ref int column)
+        {
+            Location l = _Targets.Pop();
+
+            if ((_Targets.Count == 0))
+                _CurrentState = AIStates.Searching;
+            row = l.Row;
+            column = l.Column;
         }
     }
 }

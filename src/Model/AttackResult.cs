@@ -19,22 +19,54 @@ namespace MyGame
 {
     public class AttackResult
     {
-        private ResultOfAttack _Value;
+        private int _Column;
+        private int _Row;
         private Ship _Ship;
         private string _Text;
-        private int _Row;
-        private int _Column;
+        private ResultOfAttack _Value;
 
         /// <summary>
-        /// The result of the attack
+        /// Set the _Value to the PossibleAttack value
         /// </summary>
-        /// <value>The result of the attack</value>
-        /// <returns>The result of the attack</returns>
-        public ResultOfAttack Value
+        /// <param name="value">either hit, miss, destroyed, shotalready</param>
+        public AttackResult(ResultOfAttack value, string text, int row, int column)
+        {
+            _Value = value;
+            _Text = text;
+            _Ship = null;
+            _Row = row;
+            _Column = column;
+        }
+
+        /// <summary>
+        /// Set the _Value to the PossibleAttack value, and the _Ship to the ship
+        /// </summary>
+        /// <param name="value">either hit, miss, destroyed, shotalready</param>
+        /// <param name="ship">the ship information</param>
+        public AttackResult(ResultOfAttack value, Ship ship, string text, int row, int column) : this(value, text, row, column)
+        {
+            _Ship = ship;
+        }
+
+        /// <summary>
+        /// The column where the attack occurred
+        /// </summary>
+        public int Column
         {
             get
             {
-                return _Value;
+                return _Column;
+            }
+        }
+
+        /// <summary>
+        /// The row where the attack occurred
+        /// </summary>
+        public int Row
+        {
+            get
+            {
+                return _Row;
             }
         }
 
@@ -66,48 +98,16 @@ namespace MyGame
         }
 
         /// <summary>
-        /// The row where the attack occurred
+        /// The result of the attack
         /// </summary>
-        public int Row
+        /// <value>The result of the attack</value>
+        /// <returns>The result of the attack</returns>
+        public ResultOfAttack Value
         {
             get
             {
-                return _Row;
+                return _Value;
             }
-        }
-
-        /// <summary>
-        /// The column where the attack occurred
-        /// </summary>
-        public int Column
-        {
-            get
-            {
-                return _Column;
-            }
-        }
-
-        /// <summary>
-        /// Set the _Value to the PossibleAttack value
-        /// </summary>
-        /// <param name="value">either hit, miss, destroyed, shotalready</param>
-        public AttackResult(ResultOfAttack value, string text, int row, int column)
-        {
-            _Value = value;
-            _Text = text;
-            _Ship = null;
-            _Row = row;
-            _Column = column;
-        }
-
-        /// <summary>
-        /// Set the _Value to the PossibleAttack value, and the _Ship to the ship
-        /// </summary>
-        /// <param name="value">either hit, miss, destroyed, shotalready</param>
-        /// <param name="ship">the ship information</param>
-        public AttackResult(ResultOfAttack value, Ship ship, string text, int row, int column) : this(value, text, row, column)
-        {
-            _Ship = ship;
         }
 
         /// <summary>
