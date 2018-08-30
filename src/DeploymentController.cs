@@ -101,8 +101,8 @@ namespace MyGame
 
             // Calculate the row/col clicked
             int row, col;
-            row = Convert.ToInt32(Math.Floor((mouse.Y) / (double)(CELL_HEIGHT + CELL_GAP)));
-            col = Convert.ToInt32(Math.Floor((mouse.X - FIELD_LEFT) / (double)(CELL_WIDTH + CELL_GAP)));
+            row = Convert.ToInt32(Math.Floor((mouse.Y) / (double)(UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
+            col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (double)(UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
             if (row >= 0 & row < HumanPlayer.PlayerGrid.Height)
             {
@@ -153,7 +153,7 @@ namespace MyGame
 
             SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
-            DrawMessage();
+            UtilityFunctions.DrawMessage();
         }
 
         /// <summary>
