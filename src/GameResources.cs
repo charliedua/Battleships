@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -16,6 +16,127 @@ namespace MyGame
 {
     public static class GameResources
     {
+        private static Bitmap _Animation;
+
+        private static Bitmap _Background;
+
+        private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
+
+        private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
+
+        private static Bitmap _LoaderEmpty;
+
+        private static Bitmap _LoaderFull;
+
+        private static Font _LoadingFont;
+
+        private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
+
+        private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
+
+        private static SoundEffect _StartSound;
+
+        public static void FreeResources()
+        {
+            FreeFonts();
+            FreeImages();
+            FreeMusic();
+            FreeSounds();
+            SwinGame.ProcessEvents();
+        }
+
+        public static Font GameFont(string font)
+        {
+            return _Fonts[font];
+        }
+
+        public static Bitmap GameImage(string image)
+        {
+            return _Images[image];
+        }
+
+        public static Music GameMusic(string music)
+        {
+            return _Music[music];
+        }
+
+        public static SoundEffect GameSound(string sound)
+        {
+            return _Sounds[sound];
+        }
+
+        public static void LoadResources()
+        {
+            int width, height;
+
+            width = SwinGame.ScreenWidth();
+            height = SwinGame.ScreenHeight();
+
+            SwinGame.ChangeScreenSize(800, 600);
+
+            ShowLoadingScreen();
+
+            ShowMessage("Loading fonts...", 0);
+            LoadFonts();
+            SwinGame.Delay(100);
+
+            ShowMessage("Loading images...", 1);
+            LoadImages();
+            SwinGame.Delay(100);
+
+            ShowMessage("Loading sounds...", 2);
+            LoadSounds();
+            SwinGame.Delay(100);
+
+            ShowMessage("Loading music...", 3);
+            LoadMusic();
+            SwinGame.Delay(100);
+
+            SwinGame.Delay(100);
+            ShowMessage("Game loaded...", 5);
+            SwinGame.Delay(100);
+            EndLoadingScreen(width, height);
+        }
+
+        private static void EndLoadingScreen(int width, int height)
+        {
+            SwinGame.ProcessEvents();
+            SwinGame.Delay(500);
+            SwinGame.ClearScreen();
+            SwinGame.RefreshScreen();
+            SwinGame.FreeFont(_LoadingFont);
+            SwinGame.FreeBitmap(_Background);
+            SwinGame.FreeBitmap(_Animation);
+            SwinGame.FreeBitmap(_LoaderEmpty);
+            SwinGame.FreeBitmap(_LoaderFull);
+            Audio.FreeSoundEffect(_StartSound);
+            SwinGame.ChangeScreenSize(width, height);
+        }
+
+        private static void FreeFonts()
+        {
+            foreach (Font obj in _Fonts.Values)
+                SwinGame.FreeFont(obj);
+        }
+
+        private static void FreeImages()
+        {
+            foreach (var obj in _Images.Values)
+                SwinGame.FreeBitmap(obj);
+        }
+
+        private static void FreeMusic()
+        {
+            foreach (var obj in _Music.Values)
+                Audio.FreeMusic(obj);
+        }
+
+        private static void FreeSounds()
+        {
+            foreach (var obj in _Sounds.Values)
+                Audio.FreeSoundEffect(obj);
+        }
+
         private static void LoadFonts()
         {
             NewFont("ArialLarge", "arial.ttf", 80);
@@ -51,6 +172,11 @@ namespace MyGame
             NewImage("Splash", "splash.png");
         }
 
+        private static void LoadMusic()
+        {
+            NewMusic("Background", "horrordrone.mp3");
+        }
+
         private static void LoadSounds()
         {
             NewSound("Error", "error.wav");
@@ -62,120 +188,34 @@ namespace MyGame
             NewSound("Lose", "lose.wav");
         }
 
-        private static void LoadMusic()
+        private static void NewFont(string fontName, string filename, int size)
         {
-            NewMusic("Background", "horrordrone.mp3");
+            _Fonts.Add(fontName, SwinGame.LoadFont(SwinGame.PathToResource(filename, ResourceKind.FontResource), size));
         }
 
-        /// <summary>
-        ///     ''' Gets a Font Loaded in the Resources
-        ///     ''' </summary>
-        ///     ''' <param name="font">Name of Font</param>
-        ///     ''' <returns>The Font Loaded with this Name</returns>
-
-        public static Font GameFont(string font)
+        private static void NewImage(string imageName, string filename)
         {
-            return _Fonts[font];
+            _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(filename, ResourceKind.BitmapResource)));
         }
 
-        /// <summary>
-        ///     ''' Gets an Image loaded in the Resources
-        ///     ''' </summary>
-        ///     ''' <param name="image">Name of image</param>
-        ///     ''' <returns>The image loaded with this name</returns>
-
-        public static Bitmap GameImage(string image)
+        private static void NewMusic(string musicName, string filename)
         {
-            return _Images[image];
+            _Music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
-        /// <summary>
-        ///     ''' Gets an sound loaded in the Resources
-        ///     ''' </summary>
-        ///     ''' <param name="sound">Name of sound</param>
-        ///     ''' <returns>The sound with this name</returns>
-
-        public static SoundEffect GameSound(string sound)
+        private static void NewSound(string soundName, string filename)
         {
-            return _Sounds[sound];
+            _Sounds.Add(soundName, Audio.LoadSoundEffect(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
         }
 
-        /// <summary>
-        ///     ''' Gets the music loaded in the Resources
-        ///     ''' </summary>
-        ///     ''' <param name="music">Name of music</param>
-        ///     ''' <returns>The music with this name</returns>
-
-        public static Music GameMusic(string music)
+        private static void NewTransparentColorImage(string imageName, string fileName, Color transColor)
         {
-            return _Music[music];
+            _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(fileName, ResourceKind.BitmapResource)));
         }
 
-        private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
-        private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
-        private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
-        private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
-
-        private static Bitmap _Background;
-        private static Bitmap _Animation;
-        private static Bitmap _LoaderFull;
-        private static Bitmap _LoaderEmpty;
-        private static Font _LoadingFont;
-        private static SoundEffect _StartSound;
-
-        /// <summary>
-        ///     ''' The Resources Class stores all of the Games Media Resources, such as Images, Fonts
-        ///     ''' Sounds, Music.
-        ///     ''' </summary>
-
-        public static void LoadResources()
+        private static void NewTransparentColourImage(string imageName, string fileName, Color transColor)
         {
-            int width, height;
-
-            width = SwinGame.ScreenWidth();
-            height = SwinGame.ScreenHeight();
-
-            SwinGame.ChangeScreenSize(800, 600);
-
-            ShowLoadingScreen();
-
-            ShowMessage("Loading fonts...", 0);
-            LoadFonts();
-            SwinGame.Delay(100);
-
-            ShowMessage("Loading images...", 1);
-            LoadImages();
-            SwinGame.Delay(100);
-
-            ShowMessage("Loading sounds...", 2);
-            LoadSounds();
-            SwinGame.Delay(100);
-
-            ShowMessage("Loading music...", 3);
-            LoadMusic();
-            SwinGame.Delay(100);
-
-            SwinGame.Delay(100);
-            ShowMessage("Game loaded...", 5);
-            SwinGame.Delay(100);
-            EndLoadingScreen(width, height);
-        }
-
-        private static void ShowLoadingScreen()
-        {
-            _Background = SwinGame.LoadBitmap(SwinGame.PathToResource("SplashBack.png", ResourceKind.BitmapResource));
-            SwinGame.DrawBitmap(_Background, 0, 0);
-            SwinGame.RefreshScreen();
-            SwinGame.ProcessEvents();
-
-            _Animation = SwinGame.LoadBitmap(SwinGame.PathToResource("SwinGameAni.jpg", ResourceKind.BitmapResource));
-            _LoadingFont = SwinGame.LoadFont(SwinGame.PathToResource("arial.ttf", ResourceKind.FontResource), 12);
-            _StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
-
-            _LoaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
-            _LoaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
-
-            PlaySwinGameIntro();
+            NewTransparentColorImage(imageName, fileName, transColor);
         }
 
         private static void PlaySwinGameIntro()
@@ -197,6 +237,47 @@ namespace MyGame
             SwinGame.Delay(1500);
         }
 
+        /// <summary>
+        /// Gets a Font Loaded in the Resources
+        /// </summary>
+        /// <param name="font">Name of Font</param>
+        /// <returns>The Font Loaded with this Name</returns>
+        /// <summary>
+        /// Gets an Image loaded in the Resources
+        /// </summary>
+        /// <param name="image">Name of image</param>
+        /// <returns>The image loaded with this name</returns>
+        /// <summary>
+        /// Gets an sound loaded in the Resources
+        /// </summary>
+        /// <param name="sound">Name of sound</param>
+        /// <returns>The sound with this name</returns>
+        /// <summary>
+        /// Gets the music loaded in the Resources
+        /// </summary>
+        /// <param name="music">Name of music</param>
+        /// <returns>The music with this name</returns>
+        /// <summary>
+        /// The Resources Class stores all of the Games Media Resources, such as Images, Fonts
+        /// Sounds, Music.
+        /// </summary>
+        private static void ShowLoadingScreen()
+        {
+            _Background = SwinGame.LoadBitmap(SwinGame.PathToResource("SplashBack.png", ResourceKind.BitmapResource));
+            SwinGame.DrawBitmap(_Background, 0, 0);
+            SwinGame.RefreshScreen();
+            SwinGame.ProcessEvents();
+
+            _Animation = SwinGame.LoadBitmap(SwinGame.PathToResource("SwinGameAni.jpg", ResourceKind.BitmapResource));
+            _LoadingFont = SwinGame.LoadFont(SwinGame.PathToResource("arial.ttf", ResourceKind.FontResource), 12);
+            _StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
+
+            _LoaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
+            _LoaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
+
+            PlaySwinGameIntro();
+        }
+
         private static void ShowMessage(string message, int number)
         {
             const int TX = 310;
@@ -208,7 +289,7 @@ namespace MyGame
             const int BG_Y = 453;
 
             int fullW;
-            Rectangle toDraw;
+            Rectangle toDraw = new Rectangle();
 
             fullW = 260 * number / STEPS;
             SwinGame.DrawBitmap(_LoaderEmpty, BG_X, BG_Y);
@@ -223,88 +304,6 @@ namespace MyGame
             // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();
-            SwinGame.ProcessEvents();
-        }
-
-        private static void EndLoadingScreen(int width, int height)
-        {
-            SwinGame.ProcessEvents();
-            SwinGame.Delay(500);
-            SwinGame.ClearScreen();
-            SwinGame.RefreshScreen();
-            SwinGame.FreeFont(_LoadingFont);
-            SwinGame.FreeBitmap(_Background);
-            SwinGame.FreeBitmap(_Animation);
-            SwinGame.FreeBitmap(_LoaderEmpty);
-            SwinGame.FreeBitmap(_LoaderFull);
-            Audio.FreeSoundEffect(_StartSound);
-            SwinGame.ChangeScreenSize(width, height);
-        }
-
-        private static void NewFont(string fontName, string filename, int size)
-        {
-            _Fonts.Add(fontName, SwinGame.LoadFont(SwinGame.PathToResource(filename, ResourceKind.FontResource), size));
-        }
-
-        private static void NewImage(string imageName, string filename)
-        {
-            _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(filename, ResourceKind.BitmapResource)));
-        }
-
-        private static void NewTransparentColorImage(string imageName, string fileName, Color transColor)
-        {
-            _Images.Add(imageName, SwinGame.LoadBitmap(SwinGame.PathToResource(fileName, ResourceKind.BitmapResource)));
-        }
-
-        private static void NewTransparentColourImage(string imageName, string fileName, Color transColor)
-        {
-            NewTransparentColorImage(imageName, fileName, transColor);
-        }
-
-        private static void NewSound(string soundName, string filename)
-        {
-            _Sounds.Add(soundName, Audio.LoadSoundEffect(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
-        }
-
-        private static void NewMusic(string musicName, string filename)
-        {
-            _Music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
-        }
-
-        private static void FreeFonts()
-        {
-            Font obj;
-            foreach (var obj in _Fonts.Values)
-                SwinGame.FreeFont(obj);
-        }
-
-        private static void FreeImages()
-        {
-            Bitmap obj;
-            foreach (var obj in _Images.Values)
-                SwinGame.FreeBitmap(obj);
-        }
-
-        private static void FreeSounds()
-        {
-            SoundEffect obj;
-            foreach (var obj in _Sounds.Values)
-                Audio.FreeSoundEffect(obj);
-        }
-
-        private static void FreeMusic()
-        {
-            Music obj;
-            foreach (var obj in _Music.Values)
-                Audio.FreeMusic(obj);
-        }
-
-        public static void FreeResources()
-        {
-            FreeFonts();
-            FreeImages();
-            FreeMusic();
-            FreeSounds();
             SwinGame.ProcessEvents();
         }
     }
