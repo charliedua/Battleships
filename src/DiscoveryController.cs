@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -14,69 +14,71 @@ using SwinGameSDK;
 
 /// <summary>
 
-/// ''' The battle phase is handled by the DiscoveryController.
+/// The battle phase is handled by the DiscoveryController.
 
-/// ''' </summary>
-static class DiscoveryController
+/// </summary>
+namespace MyGame
 {
-
-    /// <summary>
-    ///     ''' Handles input during the discovery phase of the game.
-    ///     ''' </summary>
-    ///     ''' <remarks>
-    ///     ''' Escape opens the game menu. Clicking the mouse will
-    ///     ''' attack a location.
-    ///     ''' </remarks>
-    public static void HandleDiscoveryInput()
+    internal static class DiscoveryController
     {
-        if (SwinGame.KeyTyped(KeyCode.VK_ESCAPE))
-            AddNewState(GameState.ViewingGameMenu);
-
-        if (SwinGame.MouseClicked(MouseButton.LeftButton))
-            DoAttack();
-    }
-
-    /// <summary>
-    ///     ''' Attack the location that the mouse if over.
-    ///     ''' </summary>
-    private static void DoAttack()
-    {
-        Point2D mouse;
-
-        mouse = SwinGame.MousePosition();
-
-        // Calculate the row/col clicked
-        int row, col;
-        row = Convert.ToInt32(Math.Floor((mouse.Y - FIELD_TOP) / (double)(CELL_HEIGHT + CELL_GAP)));
-        col = Convert.ToInt32(Math.Floor((mouse.X - FIELD_LEFT) / (double)(CELL_WIDTH + CELL_GAP)));
-
-        if (row >= 0 & row < HumanPlayer.EnemyGrid.Height)
+        /// <summary>
+        /// Draws the game during the attack phase.
+        /// </summary>s
+        public static void DrawDiscovery()
         {
-            if (col >= 0 & col < HumanPlayer.EnemyGrid.Width)
-                Attack(row, col);
+            const int SCORES_LEFT = 172;
+            const int SHOTS_TOP = 157;
+            const int HITS_TOP = 206;
+            const int SPLASH_TOP = 256;
+
+            if ((SwinGame.KeyDown(KeyCode.LeftShiftKey) | SwinGame.KeyDown(KeyCode.RightShiftKey)) & SwinGame.KeyDown(KeyCode.CKey))
+                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, true);
+            else
+                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, false);
+
+            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawMessage();
+
+            SwinGame.DrawText(HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
+            SwinGame.DrawText(HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
+            SwinGame.DrawText(HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
         }
-    }
 
-    /// <summary>
-    ///     ''' Draws the game during the attack phase.
-    ///     ''' </summary>s
-    public static void DrawDiscovery()
-    {
-        const int SCORES_LEFT = 172;
-        const int SHOTS_TOP = 157;
-        const int HITS_TOP = 206;
-        const int SPLASH_TOP = 256;
+        /// <summary>
+        /// Handles input during the discovery phase of the game.
+        /// </summary>
+        /// <remarks>
+        /// Escape opens the game menu. Clicking the mouse will
+        /// attack a location.
+        /// </remarks>
+        public static void HandleDiscoveryInput()
+        {
+            if (SwinGame.KeyTyped(KeyCode.EscapeKey))
+                GameController.AddNewState(GameState.ViewingGameMenu);
 
-        if ((SwinGame.KeyDown(KeyCode.VK_LSHIFT) | SwinGame.KeyDown(KeyCode.VK_RSHIFT)) & SwinGame.KeyDown(KeyCode.VK_C))
-            DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, true);
-        else
-            DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, false);
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+                DoAttack();
+        }
 
-        DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
-        DrawMessage();
+        /// <summary>
+        /// Attack the location that the mouse if over.
+        /// </summary>
+        private static void DoAttack()
+        {
+            Point2D mouse;
 
-        SwinGame.DrawText(HumanPlayer.Shots.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
-        SwinGame.DrawText(HumanPlayer.Hits.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, HITS_TOP);
-        SwinGame.DrawText(HumanPlayer.Missed.ToString(), Color.White, GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
+            mouse = SwinGame.MousePosition();
+
+            // Calculate the row/col clicked
+            int row, col;
+            row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (double)(UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
+            col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (double)(UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
+
+            if (row >= 0 & row < HumanPlayer.EnemyGrid.Height)
+            {
+                if (col >= 0 & col < HumanPlayer.EnemyGrid.Width)
+                    GameController.Attack(row, col);
+            }
+        }
     }
 }
