@@ -96,7 +96,7 @@ namespace MyGame
         /// </summary>
         public static void DrawBackground()
         {
-            switch (CurrentState)
+            switch (GameController.CurrentState)
             {
                 case GameState.ViewingMainMenu:
                 case GameState.ViewingGameMenu:

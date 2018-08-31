@@ -15,6 +15,7 @@ namespace MyGame
     {
         private const int _HEIGHT = 10;
         private const int _WIDTH = 10;
+        private Tile _GameTiles;
         private Dictionary<ShipName, Ship> _Ships;
 
         private int _ShipsKilled = 0;
@@ -51,7 +52,10 @@ namespace MyGame
             }
         }
 
-        public TileView Item => throw new NotImplementedException();
+        public TileView Item
+        {
+            get => _GameTiles.View;
+        }
 
         public int ShipsKilled
         {
