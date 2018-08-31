@@ -20,154 +20,151 @@ using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using SwinGameSDK;
 
-namespace MyGame
+public class Ship
 {
-    public class Ship
+    private ShipName _shipName;
+    private int _sizeOfShip;
+    private int _hitsTaken = 0;
+    private List<Tile> _tiles;
+    private int _row;
+    private int _col;
+    private Direction _direction;
+
+    /// <summary>
+    /// The type of ship
+    /// </summary>
+    /// <value>The type of ship</value>
+    /// <returns>The type of ship</returns>
+    public string Name
     {
-        private int _col;
-        private Direction _direction;
-        private int _hitsTaken = 0;
-        private int _row;
-        private ShipName _shipName;
-        private int _sizeOfShip;
-        private List<Tile> _tiles;
-
-        public Ship(ShipName ship)
+        get
         {
-            _shipName = ship;
-            _tiles = new List<Tile>();
+            if (_shipName == ShipName.AircraftCarrier)
+                return "Aircraft Carrier";
 
-            // gets the ship size from the enumarator
-            _sizeOfShip = (int) _shipName;
+            return _shipName.ToString();
         }
+    }
 
-        public int Column
+    /// <summary>
+    /// The number of cells that this ship occupies.
+    /// </summary>
+    /// <value>The number of hits the ship can take</value>
+    /// <returns>The number of hits the ship can take</returns>
+    public int Size
+    {
+        get
         {
-            get
-            {
-                return _col;
-            }
+            return _sizeOfShip;
         }
+    }
 
-        public Direction Direction
+    /// <summary>
+    /// The number of hits that the ship has taken.
+    /// </summary>
+    /// <value>The number of hits the ship has taken.</value>
+    /// <returns>The number of hits the ship has taken</returns>
+    /// <remarks>When this equals Size the ship is sunk</remarks>
+    public int Hits
+    {
+        get
         {
-            get
-            {
-                return _direction;
-            }
+            return _hitsTaken;
         }
+    }
 
-        /// <summary>
-        /// The number of hits that the ship has taken.
-        /// </summary>
-        /// <value>The number of hits the ship has taken.</value>
-        /// <returns>The number of hits the ship has taken</returns>
-        /// <remarks>When this equals Size the ship is sunk</remarks>
-        public int Hits
+    /// <summary>
+    /// The row location of the ship
+    /// </summary>
+    /// <value>The topmost location of the ship</value>
+    /// <returns>the row of the ship</returns>
+    public int Row
+    {
+        get
         {
-            get
-            {
-                return _hitsTaken;
-            }
+            return _row;
         }
+    }
 
-        /// <summary>
-        /// IsDeployed returns if the ships is deployed, if its deplyed it has more than
-        /// 0 tiles
-        /// </summary>
-        public bool IsDeployed
+    public int Column
+    {
+        get
         {
-            get
-            {
-                return _tiles.Count > 0;
-            }
+            return _col;
         }
+    }
 
-        public bool IsDestroyed
+    public Direction Direction
+    {
+        get
         {
-            get
-            {
-                return Hits == Size;
-            }
+            return _direction;
         }
+    }
 
-        /// <summary>
-        /// The type of ship
-        /// </summary>
-        /// <value>The type of ship</value>
-        /// <returns>The type of ship</returns>
-        public string Name
+    public Ship(ShipName ship)
+    {
+        _shipName = ship;
+        _tiles = new List<Tile>();
+
+        // gets the ship size from the enumarator
+        _sizeOfShip = _shipName;
+    }
+
+    /// <summary>
+    /// Add tile adds the ship tile
+    /// </summary>
+    /// <param name="tile">one of the tiles the ship is on</param>
+    public void AddTile(Tile tile)
+    {
+        _tiles.Add(tile);
+    }
+
+    /// <summary>
+    /// Remove clears the tile back to a sea tile
+    /// </summary>
+    public void Remove()
+    {
+        foreach (Tile tile in _tiles)
+            tile.ClearShip();
+        _tiles.Clear();
+    }
+
+    public void Hit()
+    {
+        _hitsTaken = _hitsTaken + 1;
+    }
+
+    /// <summary>
+    /// IsDeployed returns if the ships is deployed, if its deplyed it has more than
+    /// 0 tiles
+    /// </summary>
+    public bool IsDeployed
+    {
+        get
         {
-            get
-            {
-                if (_shipName == ShipName.AircraftCarrier)
-                    return "Aircraft Carrier";
-
-                return _shipName.ToString();
-            }
+            return _tiles.Count > 0;
         }
+    }
 
-        /// <summary>
-        /// The row location of the ship
-        /// </summary>
-        /// <value>The topmost location of the ship</value>
-        /// <returns>the row of the ship</returns>
-        public int Row
+    public bool IsDestroyed
+    {
+        get
         {
-            get
-            {
-                return _row;
-            }
+            return Hits == Size;
         }
+    }
 
-        /// <summary>
-        /// The number of cells that this ship occupies.
-        /// </summary>
-        /// <value>The number of hits the ship can take</value>
-        /// <returns>The number of hits the ship can take</returns>
-        public int Size
-        {
-            get
-            {
-                return _sizeOfShip;
-            }
-        }
-
-        /// <summary>
-        /// Add tile adds the ship tile
-        /// </summary>
-        /// <param name="tile">one of the tiles the ship is on</param>
-        public void AddTile(Tile tile)
-        {
-            _tiles.Add(tile);
-        }
-
-        public void Hit()
-        {
-            _hitsTaken = _hitsTaken + 1;
-        }
-
-        /// <summary>
-        /// Remove clears the tile back to a sea tile
-        /// </summary>
-        public void Remove()
-        {
-            foreach (Tile tile in _tiles)
-                tile.ClearShip();
-            _tiles.Clear();
-        }
-
-        /// <summary>
-        /// Record that the ship is now deployed.
-        /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        internal void Deployed(Direction direction, int row, int col)
-        {
-            _row = row;
-            _col = col;
-            _direction = direction;
-        }
+    /// <summary>
+    /// Record that the ship is now deployed.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    internal void Deployed(Direction direction, int row, int col)
+    {
+        _row = row;
+        _col = col;
+        _direction = direction;
     }
 }
