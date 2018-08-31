@@ -29,20 +29,21 @@ namespace MyGame
             Rectangle toDraw = new Rectangle();
             string whatShouldIPrint;
 
-            UtilityFunctions.DrawField(ComputerPlayer.PlayerGrid, ComputerPlayer, true);
-            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawField(GameController.ComputerPlayer.PlayerGrid, GameController.ComputerPlayer, true);
+            UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
 
             toDraw.X = 0;
             toDraw.Y = 250;
             toDraw.Width = SwinGame.ScreenWidth();
             toDraw.Height = SwinGame.ScreenHeight();
 
-            if (HumanPlayer.IsDestroyed)
+            if (GameController.HumanPlayer.IsDestroyed)
                 whatShouldIPrint = "YOU LOSE!";
             else
                 whatShouldIPrint = "-- WINNER --";
 
-            SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawText(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
+            //SwinGame.DrawTextLines(whatShouldIPrint, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace MyGame
         {
             if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.ReturnKey) || SwinGame.KeyTyped(KeyCode.EscapeKey))
             {
-                HighScoreController.ReadHighScore(HumanPlayer.Score);
+                HighScoreController.ReadHighScore(GameController.HumanPlayer.Score);
                 GameController.EndCurrentState();
             }
         }

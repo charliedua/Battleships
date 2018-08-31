@@ -121,19 +121,19 @@ namespace MyGame
 
         private static void FreeImages()
         {
-            foreach (var obj in _Images.Values)
+            foreach (Bitmap obj in _Images.Values)
                 SwinGame.FreeBitmap(obj);
         }
 
         private static void FreeMusic()
         {
-            foreach (var obj in _Music.Values)
+            foreach (Music obj in _Music.Values)
                 Audio.FreeMusic(obj);
         }
 
         private static void FreeSounds()
         {
-            foreach (var obj in _Sounds.Values)
+            foreach (SoundEffect obj in _Sounds.Values)
                 Audio.FreeSoundEffect(obj);
         }
 
@@ -174,7 +174,7 @@ namespace MyGame
 
         private static void LoadMusic()
         {
-            NewMusic("Background", "horrordrone.mp3");
+            NewMusic("Background", "starting.wav");
         }
 
         private static void LoadSounds()
@@ -182,7 +182,7 @@ namespace MyGame
             NewSound("Error", "error.wav");
             NewSound("Hit", "hit.wav");
             NewSound("Sink", "sink.wav");
-            NewSound("Siren", "siren.wav");
+            //NewSound("Siren", "siren.wav");
             NewSound("Miss", "watershot.wav");
             NewSound("Winner", "winner.wav");
             NewSound("Lose", "lose.wav");
@@ -300,7 +300,8 @@ namespace MyGame
             toDraw.Y = TY;
             toDraw.Width = TW;
             toDraw.Height = TH;
-            SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawText(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
+            //SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
             // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();

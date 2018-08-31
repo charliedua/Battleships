@@ -96,7 +96,7 @@ namespace MyGame
         /// </summary>
         public static void DrawBackground()
         {
-            switch (CurrentState)
+            switch (GameController.CurrentState)
             {
                 case GameState.ViewingMainMenu:
                 case GameState.ViewingGameMenu:
@@ -265,7 +265,7 @@ namespace MyGame
 
                     draw = true;
 
-                    switch (grid.Item(row, col))
+                    switch (grid[row, col])
                     {
                         case TileView.Miss:
                             {
