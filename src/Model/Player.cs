@@ -27,7 +27,7 @@ namespace MyGame
         private ISeaGrid _enemyGrid;
         private int _hits;
         private int _misses;
-        private SeaGrid _playerGrid = new SeaGrid(_Ships);
+        private SeaGrid _playerGrid;
         private Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();
         private int _shots;
 
@@ -159,15 +159,12 @@ namespace MyGame
         /// <value>The ship</value>
         /// <returns>The ship with the indicated name</returns>
         /// <remarks>The none ship returns nothing/null</remarks>
-        public Ship Ship
+        public Ship Ship(ShipName name)
         {
-            get
-            {
-                if (name == ShipName.None)
-                    return null/* TODO Change to default(_) if this is not a reference type */;
+            if (name == ShipName.None)
+                return null/* TODO Change to default(_) if this is not a reference type */;
 
-                return _Ships.Item[name];
-            }
+            return _Ships[name];
         }
 
         /// <summary>

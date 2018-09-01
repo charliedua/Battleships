@@ -32,16 +32,16 @@ namespace MyGame
             const int SPLASH_TOP = 256;
 
             if ((SwinGame.KeyDown(KeyCode.LeftShiftKey) | SwinGame.KeyDown(KeyCode.RightShiftKey)) & SwinGame.KeyDown(KeyCode.CKey))
-                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, true);
+                UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, true);
             else
-                UtilityFunctions.DrawField(HumanPlayer.EnemyGrid, ComputerPlayer, false);
+                UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, false);
 
-            UtilityFunctions.DrawSmallField(HumanPlayer.PlayerGrid, HumanPlayer);
+            UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
             UtilityFunctions.DrawMessage();
 
-            SwinGame.DrawText(HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
-            SwinGame.DrawText(HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
-            SwinGame.DrawText(HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
+            SwinGame.DrawText(GameController.HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
+            SwinGame.DrawText(GameController.HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
+            SwinGame.DrawText(GameController.HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace MyGame
             row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (double)(UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
             col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (double)(UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
-            if (row >= 0 & row < HumanPlayer.EnemyGrid.Height)
+            if (row >= 0 & row < GameController.HumanPlayer.EnemyGrid.Height)
             {
-                if (col >= 0 & col < HumanPlayer.EnemyGrid.Width)
+                if (col >= 0 & col < GameController.HumanPlayer.EnemyGrid.Width)
                     GameController.Attack(row, col);
             }
         }
