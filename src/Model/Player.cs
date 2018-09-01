@@ -3,6 +3,7 @@
 /// all ships are deployed and if all ships are detroyed. A Player can also attach.
 /// </summary>
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -289,6 +290,16 @@ namespace MyGame
             }
 
             return result;
+        }
+
+        IEnumerator<Ship> IEnumerable<Ship>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
