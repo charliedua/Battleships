@@ -17,23 +17,14 @@ namespace MyGame
     public static class GameResources
     {
         private static Bitmap _Animation;
-
         private static Bitmap _Background;
-
-        private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
-
-        private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
-
         private static Bitmap _LoaderEmpty;
-
         private static Bitmap _LoaderFull;
-
-        private static Font _LoadingFont;
-
+        private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
+        private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
         private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
-
         private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
-
+        private static Font _LoadingFont;
         private static SoundEffect _StartSound;
 
         public static void FreeResources()
@@ -78,23 +69,23 @@ namespace MyGame
 
             ShowMessage("Loading fonts...", 0);
             LoadFonts();
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
 
             ShowMessage("Loading images...", 1);
             LoadImages();
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
 
             ShowMessage("Loading sounds...", 2);
             LoadSounds();
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
 
             ShowMessage("Loading music...", 3);
             LoadMusic();
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
 
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
             ShowMessage("Game loaded...", 5);
-            SwinGame.Delay(100);
+            // SwinGame.Delay(100);
             EndLoadingScreen(width, height);
         }
 
@@ -109,7 +100,7 @@ namespace MyGame
             SwinGame.FreeBitmap(_Animation);
             SwinGame.FreeBitmap(_LoaderEmpty);
             SwinGame.FreeBitmap(_LoaderFull);
-            Audio.FreeSoundEffect(_StartSound);
+            // Audio.FreeSoundEffect(_StartSound);
             SwinGame.ChangeScreenSize(width, height);
         }
 
@@ -121,19 +112,19 @@ namespace MyGame
 
         private static void FreeImages()
         {
-            foreach (var obj in _Images.Values)
+            foreach (Bitmap obj in _Images.Values)
                 SwinGame.FreeBitmap(obj);
         }
 
         private static void FreeMusic()
         {
-            foreach (var obj in _Music.Values)
+            foreach (Music obj in _Music.Values)
                 Audio.FreeMusic(obj);
         }
 
         private static void FreeSounds()
         {
-            foreach (var obj in _Sounds.Values)
+            foreach (SoundEffect obj in _Sounds.Values)
                 Audio.FreeSoundEffect(obj);
         }
 
@@ -300,7 +291,7 @@ namespace MyGame
             toDraw.Y = TY;
             toDraw.Width = TW;
             toDraw.Height = TH;
-            DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawText(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
             // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();

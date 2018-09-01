@@ -265,7 +265,7 @@ namespace MyGame
 
                     draw = true;
 
-                    switch (grid.Item(row, col))
+                    switch (grid[row, col])
                     {
                         case TileView.Miss:
                             {

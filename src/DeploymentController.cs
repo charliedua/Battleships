@@ -96,7 +96,7 @@ namespace MyGame
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
                 ShipName selected;
-                selected = GetShipMouseIsOver[];
+                selected = GetShipMouseIsOver();
                 if (selected != ShipName.None)
                     _selectedShip = selected;
                 else
@@ -144,7 +144,7 @@ namespace MyGame
                     catch (Exception ex)
                     {
                         Audio.PlaySoundEffect(GameResources.GameSound("Error"));
-                        UtilityFunctions.Message= ex.Message;
+                        UtilityFunctions.Message = ex.Message;
                     }
                 }
             }
