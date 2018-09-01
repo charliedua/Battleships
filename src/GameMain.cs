@@ -20,7 +20,7 @@ namespace MyGame
                 GameController.HandleUserInput();
                 GameController.DrawScreen();
             }
-            while (!SwinGame.WindowCloseRequested() == true | CurrentState == GameState.Quitting);
+            while (!SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting);
 
             SwinGame.StopMusic();
 
