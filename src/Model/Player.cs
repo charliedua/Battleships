@@ -34,7 +34,7 @@ namespace MyGame
         public Player(BattleShipsGame controller)
         {
             _game = controller;
-
+            _playerGrid = new SeaGrid(_Ships);
             // for each ship add the ships name so the seagrid knows about them
             foreach (ShipName name in Enum.GetValues(typeof(ShipName)))
             {
@@ -291,12 +291,12 @@ namespace MyGame
 
         IEnumerator<Ship> IEnumerable<Ship>.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetShipEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

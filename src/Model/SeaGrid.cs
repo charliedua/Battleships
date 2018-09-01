@@ -80,8 +80,9 @@ namespace MyGame
             get => _GameTiles[x, y].View;
         }
 
-        public void DummyClass(Dictionary<ShipName, Ship> ships)
+        public SeaGrid(Dictionary<ShipName, Ship> ships)
         {
+            _GameTiles = new Tile[Width, Height];
             // fill array with empty Tiles
             int i;
             for (i = 0; (i
