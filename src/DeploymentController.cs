@@ -145,6 +145,7 @@ namespace MyGame
                     {
                         Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         UtilityFunctions.Message = ex.Message;
+
                     }
                 }
             }

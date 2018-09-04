@@ -297,7 +297,9 @@ namespace MyGame
             toDraw.Y = TY;
             toDraw.Width = TW;
             toDraw.Height = TH;
+
             SwinGame.DrawText(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, toDraw);
+
             // SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH)
 
             SwinGame.RefreshScreen();
