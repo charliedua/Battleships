@@ -3,18 +3,8 @@
 /// all ships are deployed and if all ships are detroyed. A Player can also attach.
 /// </summary>
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
-using SwinGameSDK;
 
 namespace MyGame
 {
@@ -26,14 +16,14 @@ namespace MyGame
         private ISeaGrid _enemyGrid;
         private int _hits;
         private int _misses;
-        private SeaGrid _playerGrid = new SeaGrid(_Ships);
+        private SeaGrid _playerGrid;
         private Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();
         private int _shots;
 
         public Player(BattleShipsGame controller)
         {
             _game = controller;
-
+            _playerGrid = new SeaGrid(_Ships);
             // for each ship add the ships name so the seagrid knows about them
             foreach (ShipName name in Enum.GetValues(typeof(ShipName)))
             {
@@ -158,15 +148,12 @@ namespace MyGame
         /// <value>The ship</value>
         /// <returns>The ship with the indicated name</returns>
         /// <remarks>The none ship returns nothing/null</remarks>
-        public Ship Ship
+        public Ship Ship(ShipName name)
         {
-            get
-            {
-                if (name == ShipName.None)
-                    return null/* TODO Change to default(_) if this is not a reference type */;
+            if (name == ShipName.None)
+                return null/* TODO Change to default(_) if this is not a reference type */;
 
-                return _Ships.Item[name];
-            }
+            return _Ships[name];
         }
 
         /// <summary>
@@ -251,7 +238,7 @@ namespace MyGame
                         PlayerGrid.MoveShip(x, y, shipToPlace, heading);
                         placementSuccessful = true;
                     }
-                    catch
+                    catch (Exception e)
                     {
                         placementSuccessful = false;
                     }
@@ -289,6 +276,16 @@ namespace MyGame
             }
 
             return result;
+        }
+
+        IEnumerator<Ship> IEnumerable<Ship>.GetEnumerator()
+        {
+            return GetShipEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MyGame
             {
                 Score s;
 
-                s = _Scores.Item[i];
+                s = _Scores[i];
 
                 // for scores 1 - 9 use 01 - 09
                 if (i < 9)
@@ -73,7 +73,7 @@ namespace MyGame
                 LoadScores();
 
             // is it a high score
-            if (value > _Scores.Item[_Scores.Count - 1].Value)
+            if (value > _Scores[_Scores.Count - 1].Value)
             {
                 Score s = new Score();
                 s.Value = value;
