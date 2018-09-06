@@ -1,4 +1,3 @@
-
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -15,7 +14,6 @@ using System.Diagnostics;
 /// </remarks>
 public class SeaGrid : ISeaGrid
 {
-
 	private const int _WIDTH = 10;
 
 	private const int _HEIGHT = 10;

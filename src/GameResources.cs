@@ -9,7 +9,6 @@ using SwinGameSDK;
 
 public static class GameResources
 {
-
 	private static void LoadFonts()
 	{
 		NewFont("ArialLarge", "arial.ttf", 80);
