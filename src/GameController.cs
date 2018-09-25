@@ -240,7 +240,7 @@ public static class GameController
                 break;
 
             default:
-                _ai = new AIHardPlayer(_theGame);
+                _ai = new AIEasyPlayer(_theGame);
                 break;
         }
 
