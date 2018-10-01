@@ -2,9 +2,13 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// Tile knows its location on the grid, if it is a ship and if it has been

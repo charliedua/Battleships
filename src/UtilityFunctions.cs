@@ -2,10 +2,14 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// This includes a number of utility methods for
@@ -13,28 +17,119 @@ using SwinGameSDK;
 /// </summary>
 internal static class UtilityFunctions
 {
+    /// <summary>
+    /// The animation cells
+    /// </summary>
     public const int ANIMATION_CELLS = 7;
+
+    /// <summary>
+    /// The cell gap
+    /// </summary>
     public const int CELL_GAP = 2;
+
+    /// <summary>
+    /// The cell height
+    /// </summary>
     public const int CELL_HEIGHT = 40;
+
+    /// <summary>
+    /// The cell width
+    /// </summary>
     public const int CELL_WIDTH = 40;
+
+    /// <summary>
+    /// The field height
+    /// </summary>
     public const int FIELD_HEIGHT = 418;
+
+    /// <summary>
+    /// The field left
+    /// </summary>
     public const int FIELD_LEFT = 349;
+
+    /// <summary>
+    /// The field top
+    /// </summary>
     public const int FIELD_TOP = 122;
+
+    /// <summary>
+    /// The field width
+    /// </summary>
     public const int FIELD_WIDTH = 418;
+
+    /// <summary>
+    /// The frames per cell
+    /// </summary>
     public const int FRAMES_PER_CELL = 8;
+
+    /// <summary>
+    /// The message top
+    /// </summary>
     public const int MESSAGE_TOP = 548;
+
+    /// <summary>
+    /// The ship gap
+    /// </summary>
     public const int SHIP_GAP = 3;
+
+    /// <summary>
+    /// The large hit
+    /// </summary>
     private static readonly Color LARGE_HIT = SwinGame.RGBAColor(252, 2, 3, 255);
+
+    /// <summary>
+    /// The large miss
+    /// </summary>
     private static readonly Color LARGE_MISS = SwinGame.RGBAColor(1, 147, 220, 255);
+
+    /// <summary>
+    /// The large sea
+    /// </summary>
     private static readonly Color LARGE_SEA = SwinGame.RGBAColor(6, 60, 94, 255);
+
+    /// <summary>
+    /// The large ship
+    /// </summary>
     private static readonly Color LARGE_SHIP = Color.Gray;
+
+    /// <summary>
+    /// The message color
+    /// </summary>
     private static readonly Color MESSAGE_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
+
+    /// <summary>
+    /// The outline color
+    /// </summary>
     private static readonly Color OUTLINE_COLOR = SwinGame.RGBAColor(5, 55, 88, 255);
+
+    /// <summary>
+    /// The ship fill color
+    /// </summary>
     private static readonly Color SHIP_FILL_COLOR = Color.Gray;
+
+    /// <summary>
+    /// The ship outline color
+    /// </summary>
     private static readonly Color SHIP_OUTLINE_COLOR = Color.White;
+
+    /// <summary>
+    /// The small hit
+    /// </summary>
     private static readonly Color SMALL_HIT = SwinGame.RGBAColor(169, 24, 37, 255);
+
+    /// <summary>
+    /// The small miss
+    /// </summary>
     private static readonly Color SMALL_MISS = SwinGame.RGBAColor(1, 147, 220, 255);
+
+    /// <summary>
+    /// The small sea
+    /// </summary>
     private static readonly Color SMALL_SEA = SwinGame.RGBAColor(6, 60, 94, 255);
+
+    /// <summary>
+    /// The small ship
+    /// </summary>
     private static readonly Color SMALL_SHIP = Color.Gray;
 
     /// <summary>
@@ -42,6 +137,9 @@ internal static class UtilityFunctions
     /// </summary>
     private static List<Sprite> _Animations = new List<Sprite>();
 
+    /// <summary>
+    /// The message
+    /// </summary>
     private static string _message;
 
     /// <summary>
@@ -99,6 +197,9 @@ internal static class UtilityFunctions
         }
     }
 
+    /// <summary>
+    /// Draws the background.
+    /// </summary>
     public static void DrawBackground()
     {
         switch (GameController.CurrentState)

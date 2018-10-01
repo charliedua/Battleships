@@ -2,9 +2,13 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// AIHardPlayer is a type of player. This AI will know directions of ships

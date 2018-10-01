@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// AttackResult gives the result after a shot has been made.
 /// </summary>

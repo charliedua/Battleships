@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// The ISeaGrid defines the read only interface of a Grid. This
 /// allows each player to see and attack their opponents grid.

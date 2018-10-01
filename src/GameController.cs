@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using SwinGameSDK;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// The GameController is responsible for controlling the game,
 /// managing user input, and displaying the current state of the
@@ -12,10 +18,29 @@ using SwinGameSDK;
 /// </summary>
 public static class GameController
 {
+    /// <summary>
+    /// The ai
+    /// </summary>
     private static AIPlayer _ai;
+
+    /// <summary>
+    /// The ai setting
+    /// </summary>
     private static AIOption _aiSetting;
+
+    /// <summary>
+    /// The human
+    /// </summary>
     private static Player _human;
+
+    /// <summary>
+    /// The state
+    /// </summary>
     private static Stack<GameState> _state = new Stack<GameState>();
+
+    /// <summary>
+    /// The game
+    /// </summary>
     private static BattleShipsGame _theGame;
 
     /// <summary>
@@ -357,11 +382,13 @@ public static class GameController
     {
         switch (result.Value)
         {
+            // if you missed
             case ResultOfAttack.Miss:
                 if (object.ReferenceEquals(_theGame.Player, ComputerPlayer))
                     AIAttack();
                 break;
 
+            // if you have no more moves left
             case ResultOfAttack.GameOver:
                 SwitchState(GameState.EndingGame);
                 break;
@@ -400,9 +427,9 @@ public static class GameController
             UtilityFunctions.AddExplosion(row, column);
         }
 
-        Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
+        Audio.PlaySoundEffect(GameResources.GameSound("Hit")); // plays the hit sound when hit
 
-        UtilityFunctions.DrawAnimationSequence();
+        UtilityFunctions.DrawAnimationSequence(); // draws it to the board aswell
     }
 
     /// <summary>

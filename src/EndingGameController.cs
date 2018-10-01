@@ -2,10 +2,14 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// The EndingGameController is responsible for managing the interactions at the end

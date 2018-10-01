@@ -2,22 +2,65 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 public static class GameResources
 {
+    /// <summary>
+    /// The animation
+    /// </summary>
     private static Bitmap _Animation;
+
+    /// <summary>
+    /// The background
+    /// </summary>
     private static Bitmap _Background;
+
+    /// <summary>
+    /// The loader empty
+    /// </summary>
     private static Bitmap _LoaderEmpty;
+
+    /// <summary>
+    /// The loader full
+    /// </summary>
     private static Bitmap _LoaderFull;
+
+    /// <summary>
+    /// The images
+    /// </summary>
     private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
+
+    /// <summary>
+    /// The fonts
+    /// </summary>
     private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
+
+    /// <summary>
+    /// The music
+    /// </summary>
     private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
+
+    /// <summary>
+    /// The sounds
+    /// </summary>
     private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
+
+    /// <summary>
+    /// The loading font
+    /// </summary>
     private static Font _LoadingFont;
+
+    /// <summary>
+    /// The start sound
+    /// </summary>
     private static SoundEffect _StartSound;
 
     /// <summary>

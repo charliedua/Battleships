@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// The result of an attack.
 /// </summary>

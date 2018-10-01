@@ -6,6 +6,12 @@ using System.Diagnostics;
 using System.IO;
 using SwinGameSDK;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// Controls displaying and collecting high score data.
 /// </summary>
@@ -14,9 +20,19 @@ using SwinGameSDK;
 /// </remarks>
 internal static class HighScoreController
 {
+    /// <summary>
+    /// The name width
+    /// </summary>
     private const int NAME_WIDTH = 3;
 
+    /// <summary>
+    /// The scores left
+    /// </summary>
     private const int SCORES_LEFT = 490;
+
+    /// <summary>
+    /// The scores
+    /// </summary>
     private static List<Score> _Scores = new List<Score>();
 
     /// <summary>

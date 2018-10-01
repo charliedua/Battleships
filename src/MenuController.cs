@@ -2,10 +2,14 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// The menu controller handles the drawing and user interactions
@@ -14,46 +18,109 @@ using SwinGameSDK;
 /// </summary>
 internal static class MenuController
 {
+    /// <summary>
+    /// The button height
+    /// </summary>
     private const int BUTTON_HEIGHT = 15;
 
+    /// <summary>
+    /// The button sep
+    /// </summary>
     private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
 
+    /// <summary>
+    /// The button width
+    /// </summary>
     private const int BUTTON_WIDTH = 75;
 
+    /// <summary>
+    /// The game menu
+    /// </summary>
     private const int GAME_MENU = 1;
 
+    /// <summary>
+    /// The game menu quit button
+    /// </summary>
     private const int GAME_MENU_QUIT_BUTTON = 2;
 
+    /// <summary>
+    /// The game menu return button
+    /// </summary>
     private const int GAME_MENU_RETURN_BUTTON = 0;
 
+    /// <summary>
+    /// The game menu surrender button
+    /// </summary>
     private const int GAME_MENU_SURRENDER_BUTTON = 1;
 
+    /// <summary>
+    /// The main menu
+    /// </summary>
     private const int MAIN_MENU = 0;
 
+    /// <summary>
+    /// The main menu play button
+    /// </summary>
     private const int MAIN_MENU_PLAY_BUTTON = 0;
 
+    /// <summary>
+    /// The main menu quit button
+    /// </summary>
     private const int MAIN_MENU_QUIT_BUTTON = 3;
 
+    /// <summary>
+    /// The main menu setup button
+    /// </summary>
     private const int MAIN_MENU_SETUP_BUTTON = 1;
 
+    /// <summary>
+    /// The main menu top scores button
+    /// </summary>
     private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
 
+    /// <summary>
+    /// The menu gap
+    /// </summary>
     private const int MENU_GAP = 0;
 
+    /// <summary>
+    /// The menu left
+    /// </summary>
     private const int MENU_LEFT = 30;
 
+    /// <summary>
+    /// The menu top
+    /// </summary>
     private const int MENU_TOP = 575;
 
+    /// <summary>
+    /// The setup menu
+    /// </summary>
     private const int SETUP_MENU = 2;
 
+    /// <summary>
+    /// The setup menu easy button
+    /// </summary>
     private const int SETUP_MENU_EASY_BUTTON = 0;
 
+    /// <summary>
+    /// The setup menu exit button
+    /// </summary>
     private const int SETUP_MENU_EXIT_BUTTON = 3;
 
+    /// <summary>
+    /// The setup menu hard button
+    /// </summary>
     private const int SETUP_MENU_HARD_BUTTON = 2;
 
+    /// <summary>
+    /// The setup menu medium button
+    /// </summary>
     private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 
+    /// <summary>
+    /// The text offset
+    /// </summary>
     private const int TEXT_OFFSET = 0;
 
     /// <summary>

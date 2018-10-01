@@ -1,9 +1,18 @@
 using SwinGameSDK;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 namespace MyGame
 {
     internal static class GameMain
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
         public static void Main()
         {
             // Opens a new Graphics Window

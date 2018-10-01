@@ -2,9 +2,13 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
+
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// Player has its own _PlayerGrid, and can see an _EnemyGrid, it can also check if
@@ -263,11 +267,14 @@ public class Player : IEnumerable<Ship>
         {
             case ResultOfAttack.Destroyed:
                 break;
+
             case ResultOfAttack.Hit:
                 _hits += 1;
                 break;
+
             case ResultOfAttack.ShotAlready:
                 break;
+
             case ResultOfAttack.Miss:
                 _misses += 1;
                 break;

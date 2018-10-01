@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// The AIEasyPlayer is a type of AIPlayer where it will randomly shoot
 /// regardless if a ship has been hit or not
@@ -21,9 +27,20 @@ public class AIEasyPlayer : AIPlayer
         RandShot
     }
 
+    /// <summary>
+    /// The current state
+    /// </summary>
     private AIStates _CurrentState = AIStates.Searching;
+
+    /// <summary>
+    /// The targets
+    /// </summary>
     private Stack<Location> _Targets = new Stack<Location>();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AIEasyPlayer"/> class.
+    /// </summary>
+    /// <param name="controller">The controller.</param>
     public AIEasyPlayer(BattleShipsGame controller) : base(controller)
     {
     }

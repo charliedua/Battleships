@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
+
 /// <summary>
 /// A Ship has all the details about itself. For example the shipname,
 /// size, number of hits taken and the location. Its able to add tiles,

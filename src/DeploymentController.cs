@@ -2,11 +2,14 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
 
+// =======================================
+// AUTHOR		: Anmol Dua
+// STUDENT ID	: 101983924
+// DESCRIPTION	: Documentation
+// =======================================
 
 /// <summary>
 /// The DeploymentController controls the players actions
@@ -14,22 +17,84 @@ using SwinGameSDK;
 /// </summary>
 internal static class DeploymentController
 {
+    /// <summary>
+    /// The dir buttons width
+    /// </summary>
     private const int DIR_BUTTONS_WIDTH = 47;
+
+    /// <summary>
+    /// The left right button left
+    /// </summary>
     private const int LEFT_RIGHT_BUTTON_LEFT = 350;
+
+    /// <summary>
+    /// The play button left
+    /// </summary>
     private const int PLAY_BUTTON_LEFT = 693;
+
+    /// <summary>
+    /// The play button width
+    /// </summary>
     private const int PLAY_BUTTON_WIDTH = 80;
+
+    /// <summary>
+    /// The random button left
+    /// </summary>
     private const int RANDOM_BUTTON_LEFT = 547;
+
+    /// <summary>
+    /// The random button width
+    /// </summary>
     private const int RANDOM_BUTTON_WIDTH = 51;
+
+    /// <summary>
+    /// The ships height
+    /// </summary>
     private const int SHIPS_HEIGHT = 90;
+
+    /// <summary>
+    /// The ships left
+    /// </summary>
     private const int SHIPS_LEFT = 20;
+
+    /// <summary>
+    /// The ships top
+    /// </summary>
     private const int SHIPS_TOP = 98;
+
+    /// <summary>
+    /// The ships width
+    /// </summary>
     private const int SHIPS_WIDTH = 300;
+
+    /// <summary>
+    /// The text offset
+    /// </summary>
     private const int TEXT_OFFSET = 5;
+
+    /// <summary>
+    /// The top buttons height
+    /// </summary>
     private const int TOP_BUTTONS_HEIGHT = 46;
+
+    /// <summary>
+    /// The top buttons top
+    /// </summary>
     private const int TOP_BUTTONS_TOP = 72;
+
+    /// <summary>
+    /// Up down button left
+    /// </summary>
     private const int UP_DOWN_BUTTON_LEFT = 410;
+
+    /// <summary>
+    /// The current direction
+    /// </summary>
     private static Direction _currentDirection = Direction.UpDown;
 
+    /// <summary>
+    /// The selected ship
+    /// </summary>
     private static ShipName _selectedShip = ShipName.Tug;
 
     /// <summary>
