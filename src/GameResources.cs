@@ -259,6 +259,9 @@ public static class GameResources
 
         // Back
         NewImage("Back", "back_button.PNG");
+
+        //Music
+        NewImage("Music", "music.png");
     }
 
     /// <summary>
@@ -266,7 +269,9 @@ public static class GameResources
     /// </summary>
     private static void LoadMusic()
     {
-        NewMusic("Background", "horrordrone.mp3");
+        NewMusic("Background1", "background1.mp3");
+        NewMusic("Background2", "background2.mp3");
+        NewMusic("Background3", "horrordrone.mp3");  
     }
 
     /// <summary>

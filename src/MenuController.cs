@@ -19,6 +19,14 @@ using SwinGameSDK;
 internal static class MenuController
 {
     /// <summary>
+    /// The music button
+    /// </summary>
+    const int MUSIC_BUTTON_LEFT = 700;
+    const int MUSIC_BUTTON_BOTTOM = 500;
+    const int MUSIC_BUTTON_HEIGHT = 32;
+    const int MUSIC_BUTTON_WIDTH = 32;
+
+    /// <summary>
     /// The button height
     /// </summary>
     private const int BUTTON_HEIGHT = 15;
@@ -171,6 +179,7 @@ internal static class MenuController
         //SwinGame.DrawText("Main Menu", Color.White, GameFont("ArialLarge"), 50, 50)
 
         DrawButtons(MAIN_MENU);
+        DrawMusicButton();
     }
 
     /// <summary>
@@ -189,11 +198,29 @@ internal static class MenuController
     }
 
     /// <summary>
+    /// Change the background music
+    /// </summary>
+
+    public static void DrawMusicButton()
+    {
+        Random rand = new Random();
+        int num = rand.Next(1, 3);
+        string str = "";
+        SwinGame.DrawBitmap(GameResources.GameImage("Music"), MUSIC_BUTTON_LEFT, MUSIC_BUTTON_BOTTOM);
+        if (UtilityFunctions.IsMouseInRectangle(MUSIC_BUTTON_LEFT, MUSIC_BUTTON_BOTTOM, MUSIC_BUTTON_WIDTH, MUSIC_BUTTON_HEIGHT) && SwinGame.MouseClicked(MouseButton.LeftButton))
+        {
+            str = "Background" + num;
+            SwinGame.PlayMusic(GameResources.GameMusic(str));
+        }
+    }
+
+    /// <summary>
     /// Handle input in the game menu.
     /// </summary>
     /// <remarks>
     /// Player can return to the game, surrender, or quit entirely
     /// </remarks>
+    /// 
     public static void HandleGameMenuInput()
     {
         HandleMenuInput(GAME_MENU, 0, 0);
