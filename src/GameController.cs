@@ -332,7 +332,6 @@ public static class GameController
             case ResultOfAttack.Destroyed:
                 PlayHitSequence(result.Row, result.Column, isHuman);
                 Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
-
                 break;
 
             case ResultOfAttack.GameOver:

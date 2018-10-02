@@ -256,6 +256,9 @@ public static class GameResources
         //Explosions
         NewImage("Explosion", "explosion.png");
         NewImage("Splash", "splash.png");
+
+        // Back
+        NewImage("Back", "back_button.PNG");
     }
 
     /// <summary>

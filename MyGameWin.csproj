@@ -39,6 +39,7 @@
   <ItemGroup>
     <Content Include="Resources\animations\splash.txt" />
     <Content Include="Resources\highscores.txt" />
+    <Content Include="Resources\images\back_button.PNG" />
     <Content Include="Resources\images\deploy.jpg" />
     <Content Include="Resources\images\deploy_button_hl.png" />
     <Content Include="Resources\images\deploy_dir_button_horiz.png" />

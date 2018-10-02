@@ -69,6 +69,10 @@ internal static class DiscoveryController
         const int SHOTS_TOP = 157;
         const int HITS_TOP = 206;
         const int SPLASH_TOP = 256;
+        const int BACK_BUTTON_LEFT = 710;
+        const int BACK_BUTTON_TOP = 5;
+        const int BACK_BUTTON_WIDTH = 60;
+        const int TOP_BUTTONS_HEIGHT = 46;
 
         if ((SwinGame.KeyDown(KeyCode.vk_LSHIFT) | SwinGame.KeyDown(KeyCode.vk_RSHIFT)) & SwinGame.KeyDown(KeyCode.vk_c))
         {
@@ -78,6 +82,10 @@ internal static class DiscoveryController
         {
             UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, false);
         }
+        if (UtilityFunctions.IsMouseInRectangle(BACK_BUTTON_LEFT, BACK_BUTTON_TOP, BACK_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT) && SwinGame.MouseClicked(MouseButton.LeftButton))
+        {
+            GameController.AddNewState(GameState.ViewingGameMenu);
+        }
 
         UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
         UtilityFunctions.DrawMessage();
@@ -85,5 +93,6 @@ internal static class DiscoveryController
         SwinGame.DrawText(GameController.HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
         SwinGame.DrawText(GameController.HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
         SwinGame.DrawText(GameController.HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
+        SwinGame.DrawBitmap(GameResources.GameImage("Back"), BACK_BUTTON_LEFT, BACK_BUTTON_TOP);
     }
 }
