@@ -6,7 +6,7 @@ using System.Diagnostics;
 using SwinGameSDK;
 
 // =======================================
-// AUTHOR		: Anmol Dua
+// AUTHOR       : Anmol Dua
 // STUDENT ID	: 101983924
 // DESCRIPTION	: Documentation
 // =======================================
